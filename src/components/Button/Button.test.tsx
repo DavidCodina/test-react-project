@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import userEvent from '@testing-library/user-event'
-import { render, screen } from '@testing-library/react'
+import { render, screen /*, waitFor */ } from '@testing-library/react'
 import { Button } from './index'
 
 /* ========================================================================
@@ -23,7 +23,7 @@ describe('Button...', () => {
   // to make your intention to fall back to non-semantic queries clear and
   // establish a stable API contract in the HTML.
 
-  test('should be in document (manual querySelector).', async () => {
+  test('should be in document (manual querySelector).', () => {
     const { container } = render(<Button>Click Me</Button>)
     const button = container.querySelector('button') // eslint-disable-line
     expect(button).toBeInTheDocument()
@@ -34,7 +34,7 @@ describe('Button...', () => {
 
   ====================== */
 
-  test('should be in document (manual querySelectorAll).', async () => {
+  test('should be in document (manual querySelectorAll).', () => {
     const { container } = render(<Button>Click Me</Button>)
     const buttons = container.querySelectorAll('button') // eslint-disable-line
 
@@ -64,7 +64,7 @@ describe('Button...', () => {
 
   ====================== */
 
-  test('should have correct text.', async () => {
+  test('should have correct text.', () => {
     render(<Button data-testid='my-button'>Click Me</Button>)
     // const button = screen.getByText(/click me/i)
     // const button = screen.getByRole('button', { name: /click me/i  })
@@ -84,7 +84,7 @@ describe('Button...', () => {
 
   ====================== */
 
-  test('should have correct title.', async () => {
+  test('should have correct title.', () => {
     render(<Button title='A Simple Button'>Click Me</Button>)
     const button = screen.getByTitle('A Simple Button')
     expect(button).toBeInTheDocument()
@@ -118,7 +118,7 @@ describe('Button...', () => {
     const user = userEvent.setup()
 
     const obj = {
-      mock() {}
+      mock: () => {}
     }
     const spy = vi.spyOn(obj, 'mock')
 
@@ -129,6 +129,22 @@ describe('Button...', () => {
 
     expect(spy).toHaveBeenCalledTimes(1)
   })
+
+  // test('should spy on obj.mock and detect being called when clicked.', async () => {
+  //   const user = userEvent.setup()
+
+  //   const obj = {
+  //     mock() {}
+  //   }
+  //   const spy = vi.spyOn(obj, 'mock')
+
+  //   render(<Button onClick={obj.mock}>Click Me</Button>)
+  //   const button = screen.getByRole('button')
+
+  //   await user.click(button)
+
+  //   expect(spy).toHaveBeenCalledTimes(1)
+  // })
 
   /* ======================
 
@@ -190,16 +206,43 @@ describe('Button...', () => {
 
     render(<ShowOnMount />)
 
-    // fingBy* has a default timeout of 1000ms.
+    // findBy* has a default timeout of 1000ms.
     // The third arg can be used to specify the timeout.
+    // Essentiallly, findBy* is the comination of waitFor with a getBy* query.
     const button = await screen.findByRole(
-      'button'
-      // , undefined, { timeout: 1000 }
+      'button' /* , undefined, { timeout: 1000 } */
     )
-
     expect(button).toBeInTheDocument()
 
+    // Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly
+    // marked as ignored with the `void` operator.eslint@typescript-eslint/no-floating-promises)
     await user.click(button)
     expect(button).not.toBeInTheDocument()
+
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    // Alternative Syntax:
+    //
+    //   let button: HTMLElement | null = null
+    //   await waitFor(() => {
+    //     button = screen.getByRole('button')
+    //     expect(button).toBeInTheDocument()
+    //   })
+    //
+    //   await user.click(button as unknown as HTMLElement)
+    //   expect(button).not.toBeInTheDocument()
+    //
+    ///////////////////////////////////////////////////////////////////////////
+  })
+
+  /* ======================
+
+  ====================== */
+
+  test('should be disabled.', () => {
+    render(<Button disabled>Click Me</Button>)
+    const button = screen.getByRole('button', { name: /click me/i })
+    // expect(button).not.toBeEnabled() // eslint-disable-line
+    expect(button).toBeDisabled()
   })
 })

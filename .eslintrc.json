@@ -13,7 +13,31 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
+    ///////////////////////////////////////////////////////////////////////////
+    //
+    // This was done in Mosh: Testing React Apps with React Testing Library, video 26.
+    // https://typescript-eslint.io/getting-started/typed-linting/
+    // ❌ "plugin:@typescript-eslint/recommended",
+    // What difference will this make? One thing that it will do is check for floating promises.
+    // For example in Button.test.tsx if we do this:
+    //
+    //   user.click(button)   // i.e., no await user.click(button)
+    //
+    // We will get an error:
+    //
+    // Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or
+    // be explicitly marked as ignored with the `void` operator.eslint@typescript-eslint/no-floating-promises)
+    //
+    // See here for more info:
+    //
+    //   https://typescript-eslint.io/users/configs/#recommended-type-checked
+    //   https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/configs/recommended-type-checked.ts
+    //
+    // When I made the switch, it ended up finding hundreds of linting problems!
+    //
+    ///////////////////////////////////////////////////////////////////////////
+
+    "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:react-hooks/recommended",
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended",
@@ -22,6 +46,15 @@
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
+  // parserOptions was added as part of step 2 of the typescript-eslint tweak.
+  // https://typescript-eslint.io/getting-started/typed-linting/
+  "parserOptions": {
+    // https://typescript-eslint.io/packages/parser/#project
+    "project": "./tsconfig.json"
+    // https://typescript-eslint.io/packages/parser/#tsconfigrootdir
+    // If omitted, ESLint will search for the tsconfig.json file in the same directory as your .eslintrc.json file.
+    //"tsconfigRootDir": __dirname
+  },
   "ignorePatterns": ["dist", ".eslintrc.cjs", ".eslintrc.json"],
 
   "plugins": [

@@ -1,7 +1,7 @@
 // Third-party imports
 import {
   RouterProvider,
-  createBrowserRouter,
+  createMemoryRouter,
   createRoutesFromElements,
   Route,
   RouteProps
@@ -37,7 +37,7 @@ export const createMiniRouter = (props: RoutePropsWithoutPath) => {
     </Route>
   )
 
-  const router = createBrowserRouter(routes)
+  const router = createMemoryRouter(routes)
   const minRouter = <RouterProvider router={router} />
   return minRouter
 }

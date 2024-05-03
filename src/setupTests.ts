@@ -1,7 +1,11 @@
 // https://github.com/vitest-dev/vitest/blob/main/examples/react-testing-lib/src/test/setup.ts
 // The actual vitest example ONLY does this, and it works.
 // What Robin Wieruch does in his tutorial also works, but is unnecessary.
-import '@testing-library/jest-dom'
+
+// import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/vitest' // Done in Mosh tutorial
+import ResizeObserver from 'resize-observer-polyfill'
+
 import { afterAll, afterEach, beforeAll } from 'vitest'
 import { server } from 'mocks/server'
 
@@ -49,6 +53,29 @@ import { server } from 'mocks/server'
 //
 //   import { createMiniRouter } from 'utils'
 //
+// Update: This issue is also mentioned in a Mosh tutorial 21 of:
+// Testing React Apps with React Testing Library. He then goes to
+// https://github.com/vitest-dev/vitest/issues/821 to get a solution,
+// which is essentially what I'm doing below (more or less).
+//
+// However, what Mosh actually does is add it directly to this file:
+//
+//   Object.defineProperty(window, 'matchMedia', {
+//     writable: true,
+//     value: vi.fn().mockImplementation(query => ({
+//       matches: false,
+//       media: query,
+//       onchange: null,
+//       addListener: vi.fn(), // deprecated
+//       removeListener: vi.fn(), // deprecated
+//       addEventListener: vi.fn(),
+//       removeEventListener: vi.fn(),
+//       dispatchEvent: vi.fn(),
+//     })),
+//   })
+//
+// In other words, no vi.stubGlobal, etc.
+//
 ///////////////////////////////////////////////////////////////////////////
 
 const matchMedia = vi.fn((query) => ({
@@ -63,6 +90,27 @@ const matchMedia = vi.fn((query) => ({
 }))
 
 vi.stubGlobal('matchMedia', matchMedia) // Now you can access it as `matchMedia` or `window.matchMedia`
+
+/* ======================
+   ResizeObserver (mock)
+====================== */
+// Testing React Apps with React Testing Library video 22.
+// ResizeObserver is also not provided by jsom.
+// To fix this use https://www.npmjs.com/package/resize-observer-polyfill
+
+global.ResizeObserver = ResizeObserver
+
+/* ======================
+  hasPointerCapture (mock)
+====================== */
+// Testing React Apps with React Testing Library video 22.
+// "TypeError: target.hasPointerCapture is not a function" on userEvent click
+// https://github.com/testing-library/user-event/discussions/1087
+
+// window.PointerEvent = MockPointerEvent as any; // Not needed.
+window.HTMLElement.prototype.scrollIntoView = vi.fn()
+window.HTMLElement.prototype.hasPointerCapture = vi.fn()
+window.HTMLElement.prototype.releasePointerCapture = vi.fn()
 
 /* ======================
 

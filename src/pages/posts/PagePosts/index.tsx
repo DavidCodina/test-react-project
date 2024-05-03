@@ -107,6 +107,10 @@ function PagePosts() {
           return
   ====================== */
 
+  if (!mode) {
+    return null
+  }
+
   return (
     <div
       className={`
@@ -155,6 +159,8 @@ function PagePosts() {
         </Button>
 
         {renderPosts()}
+
+        <div>Testing 123...</div>
       </div>
     </div>
   )

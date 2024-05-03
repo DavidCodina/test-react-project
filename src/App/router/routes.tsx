@@ -9,6 +9,10 @@ import { ConditionalRoute } from './ConditionalRoute'
 import PageHome from 'pages/PageHome' // Should NOT be lazy loaded.
 //# import PageEditor from 'pages/PageEditor'
 
+//# Test suspense/lazy implementation
+//# import { Fragment, Suspense, lazy } from 'react';
+// const AboutPage= lazy(() => import('../pages/AboutPage'));
+
 import {
   LazyPageRandom as PageRandom,
   loader as randomLoader
