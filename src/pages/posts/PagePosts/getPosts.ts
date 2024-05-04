@@ -1,13 +1,6 @@
 // Third-party imports
 import axios from 'axios'
 
-// interface IResponse {
-//   data: any
-//   success: boolean
-//   message: string
-//   status: number
-// }
-
 /* ======================
       getPosts() 
 ====================== */
@@ -44,7 +37,8 @@ export const getPosts = async () => {
     // await sleep(3000)
 
     const res = await axios.get(
-      'https://jsonplaceholder.typicode.com/posts?_limit=10'
+      //'https://jsonplaceholder.typicode.com/posts?_limit=10'
+      'https://jsonplaceholder.typicode.com/posts'
     )
 
     // //Simulate slow API
@@ -59,17 +53,12 @@ export const getPosts = async () => {
     return {
       data: res.data,
       success: true,
-      message: 'Request success!',
-      status: res?.request?.status || 200
+      message: 'Request success.'
     }
-  } catch (err: any) {
-    //# Update this to use the utility function...
-    // Notice how regardless of whether the res succeeds or fails, the API function
-    // always standardizes the response object before returning it.
+  } catch (err) {
     return {
       data: null,
-      message: 'Unable to get Posts!',
-      status: err?.request?.status || 500,
+      message: 'Request failed.',
       success: false
     }
   }

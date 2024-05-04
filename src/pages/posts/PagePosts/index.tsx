@@ -43,7 +43,6 @@ function PagePosts() {
 
   const loaderData = useLoaderData() as PostsLoaderData
   const { data: posts, success } = loaderData
-
   const { mode } = useThemeContext()
 
   /* ======================
