@@ -11,7 +11,6 @@ export * from './Spinner'
 export * from './Card'
 export * from './Collapse'
 
-export * from './LinkPreload'
 export * from './HR'
 export * from './Navicon'
 export * from './Ribbon'

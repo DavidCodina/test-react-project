@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { TWCounter } from './index'
 
 describe('TWCounter', () => {
-  test('should render an element with role of button', async () => {
+  test('should render an element with role of button', () => {
     render(<TWCounter />)
     // // screen.debug()
     const button = screen.getByRole('button')

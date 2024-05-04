@@ -59,6 +59,11 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true // Again, we probably don't need this rule either...
   },
-  "include": ["src"],
+  "include": [
+    "src/**/*",
+    "tw-plugins/**/*",
+    ".storybook/**/*",
+    "vite.config.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

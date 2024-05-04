@@ -15,7 +15,7 @@ import { RootLayout, MainLayout } from 'layouts'
 
 type RoutePropsWithoutPath = Omit<RouteProps, 'path'>
 
-export const mockLoader = async () => {
+export const mockLoader = () => {
   return {
     data: { test: 'Testing 123...' },
     success: true,

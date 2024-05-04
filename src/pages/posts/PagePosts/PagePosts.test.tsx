@@ -81,7 +81,7 @@ import PagePosts /*, { LazyPagePosts, loader } */ from './index'
 //
 ///////////////////////////////////////////////////////////////////////////
 
-const mockLoader = async () => {
+const mockLoader = () => {
   return {
     data: [
       {

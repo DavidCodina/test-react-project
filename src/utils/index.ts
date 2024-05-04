@@ -71,7 +71,7 @@ export const getErrorMessage = (
 ====================== */
 // Used to in API calls to test/simulate a slow call
 // Example: await sleep(4000)
-export const sleep = async (delay = 1000) => {
+export const sleep = (delay = 1000) => {
   return new Promise((resolve) => setTimeout(resolve, delay))
 }
 
@@ -83,13 +83,13 @@ export const imageFileToDataURL = (
   file: any,
   callback: (dataURL: string) => void
 ) => {
-  const reader = new FileReader() as FileReader
-
+  const reader = new FileReader()
   reader.onloadend = () => {
     const dataURL = reader.result as string
     callback?.(dataURL)
   }
-  reader.readAsDataURL(file as any)
+
+  reader.readAsDataURL(file)
 }
 
 /* ======================
@@ -100,7 +100,7 @@ export const imageFileToBase64String = (
   file: any,
   callback: (base64String: string) => void
 ) => {
-  const reader = new FileReader() as FileReader
+  const reader = new FileReader()
 
   reader.onloadend = () => {
     // The reader result is a dataURL, while the base64String is the stripped version.
@@ -108,7 +108,8 @@ export const imageFileToBase64String = (
     const base64String = dataURL.replace('data:', '').replace(/^.+,/, '')
     callback?.(base64String)
   }
-  reader.readAsDataURL(file as any)
+
+  reader.readAsDataURL(file)
 }
 
 /* ======================

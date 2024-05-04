@@ -4,11 +4,12 @@ import plugin from 'tailwindcss/plugin'
                             colorVarsPlugin
 ======================================================================== */
 
-export const colorVarsPlugin = plugin(function (pluginApi) {
+export const colorVarsPlugin = plugin((pluginApi) => {
   // Here we can create a plugin using addBase, addComponents, or addUtilities.
   const { addBase, theme } = pluginApi
 
   const colors = theme('colors')
+
   type Colors = typeof colors
 
   // https://gist.github.com/Merott/d2a19b32db07565e94f10d13d11a8574
