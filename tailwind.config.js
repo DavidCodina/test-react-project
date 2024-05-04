@@ -1,26 +1,27 @@
 import { extendTailwindMerge } from 'tailwind-merge'
-import { colorVarsPlugin } from './tw-plugins/colorVarsPlugin'
+
 import { basePlugin } from './tw-plugins/basePlugin'
-import { badgePlugin } from './tw-plugins/badgePlugin'
-import { buttonPlugin } from './tw-plugins/buttonPlugin'
-import { alertPlugin } from './tw-plugins/alertPlugin'
-import { listGroupPlugin } from './tw-plugins/listGroupPlugin'
-import { spinnerPlugin } from './tw-plugins/spinnerPlugin'
-import { tabsPlugin } from './tw-plugins/tabsPlugin'
-import { tablePlugin } from './tw-plugins/tablePlugin'
-import { modalPlugin } from './tw-plugins/modalPlugin'
-import { tooltipPlugin } from './tw-plugins/tooltipPlugin'
-import { popoverPlugin } from './tw-plugins/popoverPlugin'
-import { dropdownPlugin } from './tw-plugins/dropdownPlugin'
-import { scrollAreaPlugin } from './tw-plugins/scrollAreaPlugin'
+import { colorVarsPlugin } from './tw-plugins/colorVarsPlugin'
+
 import { accordionPlugin } from './tw-plugins/accordionPlugin'
+import { alertPlugin } from './tw-plugins/alertPlugin'
+import { badgePlugin } from './tw-plugins/badgePlugin'
+import { breadcrumbPlugin } from './tw-plugins/breadcrumbPlugin'
+import { buttonPlugin } from './tw-plugins/buttonPlugin'
+import { dropdownPlugin } from './tw-plugins/dropdownPlugin'
 import { formPlugin } from './tw-plugins/formPlugin'
-import { readMorePlugin } from './tw-plugins/readMorePlugin'
-import { placeholderPlugin } from './tw-plugins/placeholderPlugin'
+import { listGroupPlugin } from './tw-plugins/listGroupPlugin'
+import { modalPlugin } from './tw-plugins/modalPlugin'
 import { offCanvasPlugin } from './tw-plugins/offCanvasPlugin'
 import { paginationPlugin } from './tw-plugins/paginationPlugin'
-
-import { breadcrumbPlugin } from './tw-plugins/breadcrumbPlugin'
+import { placeholderPlugin } from './tw-plugins/placeholderPlugin'
+import { popoverPlugin } from './tw-plugins/popoverPlugin'
+import { readMorePlugin } from './tw-plugins/readMorePlugin'
+import { scrollAreaPlugin } from './tw-plugins/scrollAreaPlugin'
+import { spinnerPlugin } from './tw-plugins/spinnerPlugin'
+import { tablePlugin } from './tw-plugins/tablePlugin'
+import { tabsPlugin } from './tw-plugins/tabsPlugin'
+import { tooltipPlugin } from './tw-plugins/tooltipPlugin'
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -160,22 +161,6 @@ const config = {
           950: '#0F0906'
         },
 
-        // Lighter than the default (less blue, more stone like).
-        // Doing this is actually a bad idea because it wrecks the
-        // continuity of the gray scale from slate to stone.
-        // gray: {
-        //   50: '#F2F2F2',
-        //   100: '#E3E3E3',
-        //   200: '#C9C9C9',
-        //   300: '#ADADAD',
-        //   400: '#919191',
-        //   500: '#767676',
-        //   600: '#5E5E5E',
-        //   700: '#474747',
-        //   800: '#303030',
-        //   900: '#171717',
-        //   950: '#0D0D0D'
-        // },
         light: 'rgb(248, 249, 250)',
         // Bootstrap uses  #212529 / rgb(33, 37, 41). However,
         // I prefer to go just a little lighter with charcoal.
@@ -217,14 +202,11 @@ const config = {
         // The serif and mono will stil be implied if ommitted.
         // serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
         // mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace']
-      },
+      }
 
       ///////////////////////////////////////////////////////////////////////////
       //
-      // Any change made to colors necessitates updating the associated focus-* value.
-      // See here for other box-shadow ideas: https://manuarora.in/boxshadows
-      //
-      // Note: you could do this sort of thing:
+      // Note: you can do this sort of thing:
       //
       // boxShadow: ({ theme }) => {
       //   return {
@@ -236,153 +218,19 @@ const config = {
       // But there's actually an easier way. The theme() function can actually exist
       // inside of a string WITHOUT template literals:
       //
-      //   'focus-green': "0 0 0 0.25rem theme('colors.green.500/50%')"
+      // boxShadow: {
+      //   'focus-green': "0 0 0 0.25rem theme('colors.green.500/50%')",
+      // }
       //
       // Of course, we can still make this even better by doing programmatically.
       // In that case, we would probably need to use the function syntax instead.
+      // See here for other box-shadow ideas: https://manuarora.in/boxshadows
       //
       ///////////////////////////////////////////////////////////////////////////
-      boxShadow: {
-        'focus-inherit': '',
-        'focus-current': '',
-        'focus-transparent': '',
-        'focus-black': '0 0 0 0.25rem rgba(0, 0, 0, 0.5)',
-        'focus-white': '0 0 0 0.25rem rgba(255, 255, 255, 0.5)',
-        'focus-dark': "0 0 0 0.25rem theme('colors.dark/50%')",
-        'focus-light': "0 0 0 0.25rem theme('colors.light/50%')",
-        'focus-slate': "0 0 0 0.25rem theme('colors.slate.500/50%')",
-        'focus-gray': "0 0 0 0.25rem theme('colors.gray.500/50%')",
-        'focus-zinc': "0 0 0 0.25rem theme('colors.zinc.500/50%')",
-        'focus-neutral': "0 0 0 0.25rem theme('colors.neutral.500/50%')",
-        'focus-stone': "0 0 0 0.25rem theme('colors.stone.500/50%')",
-
-        'focus-red': "0 0 0 0.25rem theme('colors.red.500/50%')",
-        'focus-orange': "0 0 0 0.25rem theme('colors.orange.500/50%')",
-        'focus-amber': "0 0 0 0.25rem theme('colors.amber.500/50%')",
-        'focus-yellow': "0 0 0 0.25rem theme('colors.yellow.500/50%')",
-        'focus-lime': "0 0 0 0.25rem theme('colors.lime.500/50%')",
-        'focus-green': "0 0 0 0.25rem theme('colors.green.500/50%')",
-        'focus-emerald': "0 0 0 0.25rem theme('colors.emerald.500/50%')",
-        'focus-teal': "0 0 0 0.25rem theme('colors.teal.500/50%')",
-        'focus-cyan': "0 0 0 0.25rem theme('colors.cyan.500/50%')",
-        'focus-sky': "0 0 0 0.25rem theme('colors.sky.500/50%')",
-        'focus-blue': "0 0 0 0.25rem theme('colors.blue.500/50%')",
-        'focus-indigo': "0 0 0 0.25rem theme('colors.indigo.500/50%')",
-        'focus-violet': "0 0 0 0.25rem theme('colors.violet.500/50%')",
-        'focus-purple': "0 0 0 0.25rem theme('colors.purple.500/50%')",
-        'focus-fuchsia': "0 0 0 0.25rem theme('colors.fuchsia.500/50%')",
-        'focus-pink': "0 0 0 0.25rem theme('colors.pink.500/50%')",
-        'focus-rose': "0 0 0 0.25rem theme('colors.rose.500/50%')",
-
-        'focus-olive': "0 0 0 0.25rem theme('colors.olive.500/50%')",
-        'focus-brown': "0 0 0 0.25rem theme('colors.brown.500/50%')"
-      }
     }
   },
 
-  safelist: [
-    /* ======================
-              bg
-    ====================== */
-    // 200 bg for Alert
-    // 500 for Button & General
-
-    'bg-inherit', // General
-    'bg-current', // General
-    'bg-transparent', // General
-    'bg-black', // General
-    'bg-white', // General
-    'bg-dark', // Alert & General
-    'bg-light', // Alert & General
-
-    // Match any string that begins with 'bg-, anytheing except '-', then '-200'
-    { pattern: /bg-.[^-]+-200/ },
-    {
-      pattern: /bg-.[^-]+-500/,
-      // 500 hover & focus for outline Button
-      variants: ['hover', 'focus']
-    },
-
-    /* ======================
-              text
-    ====================== */
-    // 500 for outline Button & General
-    // 800 for Alert
-
-    'text-inherit', // General
-    'text-current', // General
-    'text-transparent', // General
-    'text-black', // General
-    'text-white', // General
-    'text-dark', // Alert & General
-    'text-light', // Alert & General
-
-    { pattern: /text-.[^-]+-(500|800)/ },
-
-    /* ======================
-              border
-    ====================== */
-    // 400 for Button
-    // 500 for General & oultine Button
-    // 600 for Button
-    // 800 for Alert
-
-    'border-inherit', // General
-    'border-current', // General
-    'border-transparent', // General
-    'border-black', // Alert & General
-    'border-white', // General
-    'border-dark', // General
-    'border-light', // General
-
-    { pattern: /border-.[^-]+-(500|800)/ },
-
-    {
-      pattern: /border-.[^-]+-400/,
-      // dark for solid Button
-      // 400 dark:hover & dark:focus for outline Button
-      variants: ['dark', 'dark:hover', 'dark:focus']
-    },
-
-    {
-      // 600 for solid Button's outline
-      pattern: /border-.[^-]+-600/,
-      // 600 hover & focus for outline Button
-      variants: ['hover', 'focus']
-    },
-
-    /* ======================
-            shadow
-    ====================== */
-
-    { pattern: /shadow-.[^-]+-800/ }, // 800 shadows for Alert
-
-    // For Button
-    {
-      pattern: /shadow-focus-.[^-]+/,
-      variants: ['focus']
-    },
-
-    /* ======================
-            font size
-    ====================== */
-    // All font sizes are used in Button.
-
-    'text-xxs',
-    'text-xs',
-    'text-sm',
-    'text-base',
-    'text-lg',
-    'text-xl',
-    'text-2xl',
-    'text-3xl',
-    'text-4xl',
-    'text-5xl',
-    'text-6xl',
-    'text-7xl',
-    'text-8xl',
-    'text-9xl'
-  ],
+  safelist: [],
 
   plugins: [
     colorVarsPlugin,

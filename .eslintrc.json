@@ -118,7 +118,6 @@
     //
     ///////////////////////////////////////////////////////////////////////////
     "guard-for-in": "warn",
-
     "require-await": "warn",
 
     "vitest/expect-expect": "warn",
@@ -166,6 +165,7 @@
     "promise/no-new-statics": "warn",
     "promise/no-return-in-finally": "warn",
     "promise/valid-params": "warn",
+
     "jest/no-disabled-tests": "off",
     "jest/no-commented-out-tests": "off"
 

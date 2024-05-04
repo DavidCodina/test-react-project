@@ -85,6 +85,7 @@ import { AppProvider } from 'contexts'
 //
 ///////////////////////////////////////////////////////////////////////////
 
+//# Add ThemeProvider............
 const renderWithProviders = ({ children }: any) => {
   return (
     <BrowserRouter>
