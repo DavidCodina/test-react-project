@@ -4,7 +4,7 @@ import { AppProvider } from 'contexts'
 
 ///////////////////////////////////////////////////////////////////////////
 //
-// Browser Router worked okay in the Bonnie Schulkin tutorial.
+// BrowserRouter worked okay in the Bonnie Schulkin tutorial.
 // However in that case we weren't actually testing components that
 // used the data loader features like the loader prop.
 //

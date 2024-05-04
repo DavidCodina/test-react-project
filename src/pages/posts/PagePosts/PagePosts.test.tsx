@@ -1,6 +1,5 @@
 // Third-party imports
 import { render, screen } from '@testing-library/react'
-
 import {
   RouterProvider,
   createRoutesFromElements,
@@ -10,76 +9,13 @@ import {
 
 // Custom imports
 import { RootLayout, MainLayout } from 'layouts'
-import { createMiniRouter /* , mockLoader */ } from 'utils'
+import { createMiniRouter } from 'utils'
 import PagePosts /*, { LazyPagePosts, loader } */ from './index'
 
-///////////////////////////////////////////////////////////////////////////
-//
-// Problem:
-//
-// test("should render 'Testing 123...' (LazyPagePosts)", async () => {
-//   render(<PagePosts />)
-//   const title = await screen.findByText('Testing 123...')
-//   expect(title).toBeInTheDocument()
-// })
-//
-// Will result in:
-//
-//   Error: useLoaderData must be used within a data router.
-//
-// Apparently, MemoryRouter, BrowserRouter and HashRouter are all data routers.
-// However, they MUST be generated using RouterProvider -  a self closing component
-// that takes a router prop, which is created by a create???Router function.
-//
-// In any case, we need a way to provide the router to the component. Essentially,
-// we want to wrap the component. The only issue is that createBrowserRouter/createMemoryRouter creates
-// a self-closing router, so we can no longer just wrap the component with the provider.
-//
-// This also means that the setup example found here: // https://testing-library.com/docs/react-testing-library/setup/
-// WILL NOT WORK! Why? Because wrapper works specifically with a component that accepts children, and
-// and the self-closing routers DO NOT ACCEPT CHILDREN.
-//
-// Solution:
-//
-//   test("should render 'Testing 123...' (Using a memory router.)", async () => {
-//     const routes = createRoutesFromElements(<Route path='/' loader={mockLoader} element={<PagePosts />} />)
-//     const router = createMemoryRouter(routes, { initialEntries: ['/'], initialIndex: 0 })
-//
-//     render(<RouterProvider router={router} />)
-//     const title = await screen.findByText('Testing 123...')
-//     expect(title).toBeInTheDocument()
-//   })
-//
-// That said, there may be other providers (i.e., global contexts) that we
-// need to provide to the page component. Thus, this is a better approach:
-//
-//   test("should render 'Testing 123...' (Using createMemoryRouter)", async () => {
-//     const routes = createRoutesFromElements(
-//       <Route element={<RootLayout />}>
-//         <Route element={<MainLayout />}>
-//           <Route path='/' loader={mockLoader} element={<PagePosts />} />
-//         </Route>
-//       </Route>
-//     )
-//
-//     // https://reactrouter.com/en/main/routers/create-memory-router
-//      const router = createMemoryRouter(routes, {
-//       initialEntries: ['/'],
-//       initialIndex: 0
-//     })
-//
-//     render(<RouterProvider router={router} />)
-//     const title = await screen.findByText('Testing 123...')
-//
-//     expect(title).toBeInTheDocument()
-//   })
-//
-// Finally, for simple use cases that do not require multiple routes, you
-// can use createMiniRouter() from utils.
-//
-// This is the way!
-//
-///////////////////////////////////////////////////////////////////////////
+/* ======================
+      mockLoader
+====================== */
+// Alternatively, use the actual loader and msw.
 
 const mockLoader = () => {
   return {
@@ -115,7 +51,7 @@ const mockLoader = () => {
 ======================================================================== */
 
 describe('PagePosts', () => {
-  test("should render 'Testing 123...' (createMinRouter)", async () => {
+  test("should render 'Testing 123...' (custom createMinRouter() utility)", async () => {
     const miniRouter = createMiniRouter({
       element: <PagePosts />, // No need to use LazyPagePosts for the test.
       loader: mockLoader // Better to use mockLoader rather than actual loader.
@@ -149,7 +85,6 @@ describe('PagePosts', () => {
 
     render(<RouterProvider router={router} />)
     const title = await screen.findByText('Testing 123...')
-
     expect(title).toBeInTheDocument()
   })
 })
