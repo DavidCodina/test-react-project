@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 
 /* ======================
-
-  ====================== */
+        List
+====================== */
 
 const List = ({ items }: { items?: string[] }) => {
   if (!items || !Array.isArray(items)) {
@@ -22,9 +22,9 @@ const List = ({ items }: { items?: string[] }) => {
   )
 }
 
-/* ======================
-
-====================== */
+/* ========================================================================
+                                Tests   
+======================================================================== */
 
 describe('List...', () => {
   test('should be in document.', () => {
@@ -34,6 +34,10 @@ describe('List...', () => {
     const list = screen.getByRole('list')
     expect(list).toBeInTheDocument() // Note: typing '.tbi' will suggest toBeInTheDocument.
   })
+
+  /* ======================
+
+  ====================== */
 
   test('should not be in the document (i.e., null).', () => {
     const { container } = render(<List />)
@@ -46,11 +50,29 @@ describe('List...', () => {
     expect(container).toBeEmptyDOMElement()
   })
 
+  /* ======================
+
+  ====================== */
+
   test('should be a list with three list items.', () => {
     render(<List items={['a', 'b', 'c']} />)
-    const listItems = screen.getAllByRole('listitem')
+
+    // You could do this...
+    // const listItems = screen.getAllByRole('listitem')
+    // expect(listItems).toHaveLength(3)
+
+    // But here's another way:
+    const list = screen.getByRole('list')
+    expect(list).toBeInTheDocument()
+
+    // Get all list items within the list and check there are the expected number.
+    const listItems = within(list).getAllByRole('listitem')
     expect(listItems).toHaveLength(3)
   })
+
+  /* ======================
+
+  ====================== */
 
   test("should be a list with second item of 'Item 2'.", () => {
     const items = ['Item 1', 'Item 2', 'Item 3']
@@ -58,6 +80,10 @@ describe('List...', () => {
     const listItems = screen.getAllByRole('listitem')
     expect(listItems[1]).toHaveTextContent(items[1] as string)
   })
+
+  /* ======================
+
+  ====================== */
 
   test(`should have a third <li> with a class of 'font-bold' `, () => {
     render(<List items={['w', 'x', 'y', 'z']} />)

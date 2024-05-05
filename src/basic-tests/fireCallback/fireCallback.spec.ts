@@ -51,4 +51,19 @@ describe('fireCallback()...', () => {
 
     expect(result).toBe(message)
   })
+
+  test(`should return the correct concatenation.`, () => {
+    const name = 'Fred'
+    const expected = `${name} is a dummy!`
+
+    const mockCallback = vi.fn().mockImplementation((name: string) => {
+      return `${name} is a dummy!`
+    })
+
+    const result = fireCallback(name, mockCallback)
+
+    expect(mockCallback).toHaveBeenCalledWith(name)
+    expect(result).toBe(expected)
+    expect(result).not.toBe(`${name} is a genius!`)
+  })
 })

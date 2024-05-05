@@ -103,6 +103,8 @@ describe('PagePosts', () => {
 
     // Get all list items within the list and check there are the expected number.
     const listItems = within(list).getAllByRole('listitem')
+
+    expect(listItems.length).toBeGreaterThan(2)
     expect(listItems).toHaveLength(3)
 
     ///////////////////////////////////////////////////////////////////////////
@@ -148,7 +150,7 @@ describe('PagePosts', () => {
   // This example uses  createRoutesFromElements/createMemoryRouter
   // and the actual loader, but the loader is intercepted by msw.
 
-  it.skip('should render with data from msw.', async () => {
+  it('should render with data from msw.', async () => {
     const routes = createRoutesFromElements(
       <Route element={<RootLayout />}>
         <Route element={<MainLayout />}>
@@ -173,6 +175,8 @@ describe('PagePosts', () => {
 
     // Get all list items within the list and check there are the expected number.
     const listItems = within(list).getAllByRole('listitem')
+
+    expect(listItems.length).toBeGreaterThan(2)
     expect(listItems).toHaveLength(3)
 
     const listItem2 = listItems?.[1]
@@ -186,7 +190,7 @@ describe('PagePosts', () => {
 
   ====================== */
 
-  it.skip("should render 'Testing 123...'", async () => {
+  it("should render 'Testing 123...'", async () => {
     const miniRouter = createMiniRouter({
       element: <PagePosts />, // No need to use LazyPagePosts for the test.
       loader: mockLoader // Better to use mockLoader rather than actual loader.

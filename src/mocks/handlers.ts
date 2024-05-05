@@ -1,5 +1,5 @@
 // https://mswjs.io/docs/migrations/1.x-to-2.x/
-import { http } from 'msw'
+import { http, HttpResponse } from 'msw'
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -41,12 +41,21 @@ export const handlers = [
         }
       ]
 
+      ///////////////////////////////////////////////////////////////////////////
+      //
+      // This is how it's done in the official documentation.
       // https://mswjs.io/docs/migrations/1.x-to-2.x/#response-declaration
-      return new Response(JSON.stringify(body), {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+      //
+      //   return new Response(JSON.stringify(body), {
+      //     headers: { Content-Type': 'application/json' }
+      //   })
+      //
+      // However, in Mosh's Testing React Apps with React Testing Library, 28
+      // he uses HttpResponse.json().
+      //
+      ///////////////////////////////////////////////////////////////////////////
+
+      return HttpResponse.json(body)
     }
   )
 

@@ -15,8 +15,8 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:verbose": "vitest --reporter verbose",
-    "test:run": "vitest --run",
-    "test:coverage": "vitest --coverage",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "sb-build-docs": "https://storybook.js.org/docs/react/sharing/publish-storybook  - Use: npx http-server ./PATH_TO_BUILD"
