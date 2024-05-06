@@ -3,6 +3,6 @@ export const getExchangeRate = (from: string, to: string): number => {
   return Math.random()
 }
 
-export const getMyName = (): 'David' => {
+export const getMyName = (): string => {
   return 'David'
 }

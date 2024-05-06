@@ -1,13 +1,13 @@
-import { getPriceInCurrency } from './getPriceInCurrency'
-import * as utils from './utils'
-// import { getExchangeRate } from './utils'
+import { getPriceInCurrency } from './'
+import * as utils from '../utils'
+// import { getExchangeRate } from '../utils'
 
 // Gotcha: This is a global mock, hoisted to the top of the file, so
 // even if you create it within a test case, it will STILL be hoisted.
 // for that reason, we should always define it at the top of the file instead.
 // However, be aware that toHaveBeenCalledTimes() and other such methods will
 // be cumulative, unless you clear the mocks before each test.
-vi.mock('./utils', () => ({
+vi.mock('../utils', () => ({
   getExchangeRate: vi.fn().mockReturnValue(1.5)
 }))
 
@@ -42,16 +42,20 @@ vi.mock('./utils', () => ({
 //
 // There are many different approaches to module mocking. By doing this:
 //
-//   vi.mock('./utils') // Hoisted to top of file in Vitest, but not necessarily in Jest.
+//   vi.mock('../utils') // Hoisted to top of file in Vitest, but not necessarily in Jest.
 //
 // Then for the test we can do this:
 //
-//   import { getExchangeRate } from './utils'
+//   import { getExchangeRate } from '../utils'
 //
 //   ...
 //
 //   it('should return price in target currency.', () => {
-//     vi.mocked(getExchangeRate).mockReturnValue(1.5) //^ This is hoisted/global !!!
+//
+//     //^ This is hoisted! See here: https://vitest.dev/api/vi.html#vi-mock
+//     //^ "The call to vi.mock is hoisted, so it doesn't matter where you call it."
+//     //^ This seems to also apply to vi.mocked(), which is used to change a vi.mock().
+//     vi.mocked(getExchangeRate).mockReturnValue(1.5)
 //     const price = getPriceInCurrency(10, 'AUD')
 //     expect(price).toBe(15)
 //   })
@@ -60,7 +64,7 @@ vi.mock('./utils', () => ({
 // actually global, so if you don't change it elsewhere it will remain mocked.
 // For this reason, it's probably better to set the value at the top:
 //
-//   vi.mock('./utils')
+//   vi.mock('../utils')
 //   vi.mocked(getExchangeRate).mockReturnValue(1.5)
 //
 // Also if you didn't want to apply it globally to every test in the file, you can do this:
@@ -79,11 +83,11 @@ vi.mock('./utils', () => ({
 //
 // But what if we don't want to mock every function in the module? Solution, you can do this instead:
 //
-//   import * as utils from './utils'
+//   import * as utils from '../utils'
 //
 //   it('should return price in target currency.', () => {
-//     vi.mock('./utils', async () => {
-//       const originalModule = await vi.importActual<typeof utils>('./utils')
+//     vi.mock('../utils', async () => {
+//       const originalModule = await vi.importActual<typeof utils>('../utils')
 //       return {
 //         ...originalModule,
 //         getExchangeRate: vi.fn().mockReturnValue(1.5)
@@ -95,7 +99,7 @@ vi.mock('./utils', () => ({
 //
 // Or just do this, without vi.importActual
 //
-//   vi.mock('./utils', async (importOriginal) => {
+//   vi.mock('../utils', async (importOriginal) => {
 //     const originalModule: any = await importOriginal()
 //     return {
 //       ...originalModule,
