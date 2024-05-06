@@ -1,5 +1,15 @@
-import { getPriceInCurrency } from './'
+import { getPriceInCurrency } from './getPriceInCurrency'
 import * as utils from './utils'
+// import { getExchangeRate } from './utils'
+
+// Gotcha: This is a global mock, hoisted to the top of the file, so
+// even if you create it within a test case, it will STILL be hoisted.
+// for that reason, we should always define it at the top of the file instead.
+// However, be aware that toHaveBeenCalledTimes() and other such methods will
+// be cumulative, unless you clear the mocks before each test.
+vi.mock('./utils', () => ({
+  getExchangeRate: vi.fn().mockReturnValue(1.5)
+}))
 
 /* ========================================================================
 
@@ -30,7 +40,7 @@ import * as utils from './utils'
 //
 /////////////////////////
 //
-// There are actually many different approaches to mdoule mocking. By doing this:
+// There are many different approaches to module mocking. By doing this:
 //
 //   vi.mock('./utils') // Hoisted to top of file in Vitest, but not necessarily in Jest.
 //
@@ -41,36 +51,33 @@ import * as utils from './utils'
 //   ...
 //
 //   it('should return price in target currency.', () => {
-//     vi.mocked(getExchangeRate).mockReturnValue(1.5)
+//     vi.mocked(getExchangeRate).mockReturnValue(1.5) //^ This is hoisted/global !!!
 //     const price = getPriceInCurrency(10, 'AUD')
 //     expect(price).toBe(15)
 //   })
 //
-//  According to Mosh, "Vitest will replace EVERY exported function in this module with a mock function."
-//  He says this in video 37 at 2:30.
+// Note: even though we defined vi.mocked inside the test case, it's
+// actually global, so if you don't change it elsewhere it will remain mocked.
+// For this reason, it's probably better to set the value at the top:
 //
-//  That statement is not entirely accurate. By mocking the module, any functions or variables exported from it
-//  can be overridden or mocked for testing purposes. However, Vitest will only replace the functions that are explicitly mocked
-//  with vi.mock or vi.mocked. In other words, vi.mock('./utils') alone does not mock all the functions in the ./utils module.
-//  It simply creates a mock implementation of the entire module, allowing you to selectively mock specific functions or variables
-//  exported from that module. Thus, if we had a second test case that did this, it will still call the actual
-//  implementation of getExchangeRate:
+//   vi.mock('./utils')
+//   vi.mocked(getExchangeRate).mockReturnValue(1.5)
 //
-//   it(`should return a price that is of type 'number'.`, () => {
-//     const price = getPriceInCurrency(10, 'AUD')
-//     expect(price).toBeTypeOf('number')
-//   })
+// Also if you didn't want to apply it globally to every test in the file, you can do this:
 //
-// In video 41 (Partial Mocking) of Mosh's Mastering Javascript Unit Testing he says again that EVERY function
-// in the module will be replaced with a mock function, but this is simply not true. I don't know why he
-// thinks this. It might be a remnant of an early version of Vitest, or some older Jest behavior.
+//  beforeEach(() => {  vi.resetAllMocks() })
+//
+// One can also overwrite the initial vi.mocked in a specific test, but this
+// too would become the new hoisted value. It's quite unintuitive!
+// I prefer to just use beforeEach(() => {  vi.resetAllMocks() })
+//
+// According to Mosh, "Vitest will replace EVERY exported function in this module with a mock function."
+// He says this in video 37 at 2:30. In other words, every function WILL get replaced with vi.fn().
+// This is demonstrated in getName.test.ts.
 //
 /////////////////////////
 //
-// Initially, the idea of mocking EVERY function in a particular module freaked me out.
-// That's not what I want to do! That may be okay if we only have one function in the module,
-// but what if we have multiple functions in the module, and don't want them all to get mocked?
-// Solution, you can do this instead:
+// But what if we don't want to mock every function in the module? Solution, you can do this instead:
 //
 //   import * as utils from './utils'
 //
@@ -86,7 +93,7 @@ import * as utils from './utils'
 //     expect(price).toBe(15)
 //   })
 //
-// Better yet, just do this for the mock with vi.importActual
+// Or just do this, without vi.importActual
 //
 //   vi.mock('./utils', async (importOriginal) => {
 //     const originalModule: any = await importOriginal()
@@ -96,38 +103,20 @@ import * as utils from './utils'
 //     }
 //   })
 //
-// However, after futher research it turns out that using vi.importActual is
-// not necessary in this case, as Vitest's vi.mock function already handles
-// unmocked functions correctly. Any other functions from the original ./utils
-// module will be left untouched and will use their original implementations.
-// This means we can simply use the following implementation, which is essentially,
-// a more concise version of the one suggested by Mosh.
-//
-//   vi.mock('./utils', () => ({
-//     getExchangeRate: vi.fn().mockReturnValue(1.5),
-//   }));
 //
 // Again, in video 41 on partial mocking Mosh says that if we don't provide the function
 // as the second argument and spread ...originalModule then Vitest
 // will replace EVERY function in that module with vi.fn().
 //
-// The statement about Vitest replacing every function in the module with vi.fn() if the second argument
-// is not provided seems to be outdated or possibly referring to an older version of Vitest or a different
-// testing framework like Jest. In the current version of Vitest, calling vi.mock('./utils') without providing
-// a second argument DOES NOT automatically mock all functions in the module with vi.fn(). Instead, it creates
-// a mock implementation of the module, but all functions and variables retain their original implementations
-// UNLESS EXPLICITLY MOCKED using vi.mocked().
-//
-// It really seems like the behavior of Vitest has changed since the videos were created.
-// A similar example exists in Academind tutorials where he simply did vi.mock('fs'), to
-// prevent the Node fs module from running. He also indicated that "ALL functions are then
-// replaced with mock functions."
-//
 ///////////////////////////////////////////////////////////////////////////
 
 describe('getPriceInCurrency()...', () => {
-  // beforeEach(() => { vi.clearAllMocks() })
-  // const getExchangeRateSpy = vi.spyOn(utils, 'getExchangeRate')
+  beforeEach(() => {
+    // In the above comments I mentioned using vi.resetAllMocks().
+    // However, here we actually want to use clearAllMocks().
+    // The difference between clearing and resetting is also a gotcha!
+    vi.clearAllMocks()
+  })
 
   it('should return price in target currency.', () => {
     ///////////////////////////////////////////////////////////////////////////
@@ -151,21 +140,21 @@ describe('getPriceInCurrency()...', () => {
     //
     ///////////////////////////////////////////////////////////////////////////
 
-    vi.mock('./utils', () => ({
-      getExchangeRate: vi.fn().mockReturnValue(1.5)
-    }))
-
     const price = getPriceInCurrency(10, 'AUD')
     expect(price).toBe(15)
+    expect(utils.getExchangeRate).toHaveBeenCalledTimes(1)
   })
 
   it(`should return a price that is of type 'number'.`, () => {
     const price = getPriceInCurrency(10, 'AUD')
     expect(price).toBeTypeOf('number')
+    expect(price).not.toBeNaN()
+    expect(utils.getExchangeRate).toHaveBeenCalledTimes(1)
   })
 
   // You can do this. However, in principle it is veering away
   // from specifically unit testing getPriceInCurrency().
+
   it(`should call getExchangeRate() once.`, () => {
     // In this case, we don't want to replace getExchangeRate() with a mock,
     // but we do want to watch it or spy on it to make sure it executed.
@@ -183,7 +172,7 @@ describe('getPriceInCurrency()...', () => {
     // have been called 3 times. In that case, you would probably
     // need to implement logic to reset the spy before each test.
     // There are several options such as mockClear, clearAllMocks,
-    // mockRest() and mockRestore(). Thus at the top of describe, we
+    // mockReset() and mockRestore(). Thus at the top of describe, we
     // might do this:
     //
     //   beforeEach(() => { vi.clearAllMocks() })
