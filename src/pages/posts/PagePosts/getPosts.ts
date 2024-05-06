@@ -41,7 +41,7 @@ export const getPosts = async () => {
       'https://jsonplaceholder.typicode.com/posts'
     )
 
-    // //Simulate slow API
+    // Simulate slow API
     // await import('utils')
     //   .then(async (module) => {
     //     module.log('Sleeping for three seconds.')

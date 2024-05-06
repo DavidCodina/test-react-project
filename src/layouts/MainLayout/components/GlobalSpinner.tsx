@@ -25,6 +25,7 @@ export const GlobalSpinner = ({
   delay?: number
 }) => {
   const navigation = useNavigation()
+
   const navigationState = navigation.state
   const [showSpinner, setShowSpinner] = useState(false)
 
@@ -69,6 +70,71 @@ export const GlobalSpinner = ({
       )
     }
     return children
+  }
+
+  return renderSpinner()
+}
+
+/* ========================================================================
+                            FixedGlobalSpinnner
+======================================================================== */
+
+export const FixedGlobalSpinner = ({ delay = 0 }: { delay?: number }) => {
+  const navigation = useNavigation()
+
+  const navigationState = navigation.state
+  const [showSpinner, setShowSpinner] = useState(false)
+
+  /* ======================
+        useEffect()
+  ====================== */
+  // Because it's annoying to see a momentary spinner, it's
+  // better to wait at least 500ms before showing it.
+  // One thing you don't want is for the
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+
+    if (navigationState === 'loading') {
+      timeout = setTimeout(() => {
+        setShowSpinner(true)
+      }, delay)
+    }
+
+    // Make sure to prevent the spinner from rendering
+    // AFTER the component has already loaded.
+    return () => {
+      clearTimeout(timeout)
+      setShowSpinner(false)
+    }
+  }, [delay, navigationState])
+
+  /* ======================
+        renderSpinner()
+  ====================== */
+
+  const renderSpinner = () => {
+    if (showSpinner) {
+      return (
+        <div className='fixed inset-0'>
+          <div
+            className='absolute'
+            style={{
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%,-50%)'
+            }}
+          >
+            <FontAwesomeIcon
+              className='text-6xl text-blue-500'
+              icon={faSpinner}
+              spin
+            />
+          </div>
+        </div>
+      )
+    }
+    return null
   }
 
   return renderSpinner()

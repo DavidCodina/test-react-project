@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faHome,
   // faGear,
-  // faInfo,
+  faInfo,
   // faChevronUp,
   // faChevronDown,
   faSun,
@@ -181,6 +181,19 @@ export const CustomOffCanvas = ({
         >
           <FontAwesomeIcon icon={faHome} style={{ marginRight: 10 }} />
           Home
+        </NavLink>
+
+        <NavLink
+          className={({ isActive }) => getClassName(isActive)}
+          to={
+            location.pathname === '/about' && location.search
+              ? `/about${location.search}`
+              : '/about'
+          }
+          onClick={handleClose}
+        >
+          <FontAwesomeIcon icon={faInfo} style={{ marginRight: 10 }} />
+          About
         </NavLink>
       </Fragment>
     )

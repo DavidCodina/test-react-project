@@ -8,12 +8,16 @@ import 'react-toastify/dist/ReactToastify.css'
 // Custom imports
 import { useThemeContext } from 'contexts'
 import { Menu } from './components/Menu'
-import { GlobalSpinner } from './components/GlobalSpinner'
+import {
+  /*GlobalSpinner, */ FixedGlobalSpinner
+} from './components/GlobalSpinner'
 import PageError from 'pages/PageError'
 
 // This fallback was used just for testing lazy + preloading, but obviously
 // you don't want a big dumb loading h1 every time something lazy loads.
 const Fallback = () => {
+  console.log('Fallback rendered...')
+
   return (
     <div className='mx-auto w-full flex-1 p-6 2xl:container'>
       <h1 className='tex-6xl py-5 text-center font-black text-red-500'>
@@ -51,13 +55,6 @@ export const MainLayout = () => {
   /* ======================
           return
   ====================== */
-  ///////////////////////////////////////////////////////////////////////////
-  //
-  // Initially, the top-level element was <Fragment>. However, once
-  // the Tailwind theme (light/dark mode) was implemented, I needed
-  // a place to conditionally set the background color and text color.
-  //
-  ///////////////////////////////////////////////////////////////////////////
 
   return (
     <Fragment>
@@ -74,11 +71,36 @@ export const MainLayout = () => {
           onError={handleError}
           onReset={handleReset}
         >
-          <GlobalSpinner delay={750}>
-            <Suspense fallback={<Fallback />}>
-              <Outlet context={{ test: 'Outlet value!' }} />
-            </Suspense>
-          </GlobalSpinner>
+          <FixedGlobalSpinner />
+
+          {/* The GlobalSpinner will run while any react-router-dom data loader is loading. 
+          In the absence of GlobalSpinner, the default behavior of react-router-dom is to
+          delay/await page switching until the loader function completes. The GlobalSpinner completely
+          replaces all content. It's like a separate Page. For this reason, I generally prefer using
+          a FixedGlobalSpinner. This component sits on top of the content and works in conjunction with
+          the default behavior of delaying page transition. */}
+
+          {/* <GlobalSpinner delay={750}> */}
+
+          {/* If the lazy loading of the page is not awaited within the data loader, then
+          once the loader has completed, the page will be lazy loaded. 
+            
+            Be aware that:
+            1. The lazy loading of the page happens only once, so if you've already been to the page, the fallback won't fire.
+
+            2. If you refresh the page, you will not see the GlobalSpinner or the Suspense fallback.
+            Instead, by default you will see a blank screen. This can be mitigated by using fallbackElement
+            prop on RouterProviderer
+
+              <RouterProvider 
+                router={router} 
+                fallbackElement={<div className='fixed inset-0 text-6xl'>Loading</div>} 
+              />
+             */}
+          <Suspense fallback={<Fallback />}>
+            <Outlet context={{ test: 'Outlet value!' }} />
+          </Suspense>
+          {/* </GlobalSpinner> */}
         </ErrorBoundary>
 
         {/* For precedence, it's important that the <Menu /> comes after the other JSX. */}

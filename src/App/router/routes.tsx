@@ -22,6 +22,7 @@ import {
   LazyPageAbout as PageAbout,
   loader as pageAboutLoader
 } from 'pages/PageAbout'
+
 import { AboutDavid } from 'pages/PageAbout/AboutDavid'
 import { AboutHolly } from 'pages/PageAbout/AboutHolly'
 
@@ -195,7 +196,12 @@ export const routes = createRoutesFromElements(
         And with this kind of implementation going to '/about/david' will just drop AboutDavid
         directly underneath PageAbout (i.e., no need to implement <Outlet />). */}
 
-      <Route path='/about' element={<PageAbout />} loader={pageAboutLoader}>
+      <Route
+        path='/about'
+        element={<PageAbout />}
+        //
+        loader={pageAboutLoader}
+      >
         <Route index element={<AboutHolly />} />
         <Route path='david' element={<AboutDavid />} />
         <Route path='holly' element={<AboutHolly />} />

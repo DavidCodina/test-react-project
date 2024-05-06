@@ -42,34 +42,42 @@ import type {} from 'styled-components/cssprop'
 
 ======================================================================== */
 //# ❓ Implement use-context-selector on AppContext and maybe also ThemeContext.
+
 //# ❓ Move SimpleCollapse to components directory.
 
-//# ❓ Test MSW implentation.
-//# ❓ Build out the side navigation.
-//# ❓ Vitest deep dive
-//# ❓ PrivateRoutes: Note: I have since updated mern-stack-project, so use that as a model, what is here.
-
 //# Add React Image Preview (I think latest is in Next eCommerce), React Skeleton, withUnmounter, etc.
-//# Add Some Cypress
-//# Add React Query.
+
 //# Add JSON Placeholder Fake API or Mirage https://miragejs.com
 
-//# Use this to create a new react-hook-form demo.
-//# Storybook 7 deep dive
-
-//# RTL deep dive
-//# Add 1-2 storybook addons.
 //# Add Switch, InputPhone, & React Date Picker (and/or ShadCDN).
 
-//#  https://reactrouter.com/en/main/start/overview
-// Validation error status: 422
+//# Lazy Loading :  https://reactrouter.com/en/main/start/overview
 
 // Review: https://www.youtube.com/watch?v=kvOp1jffVKE
+
+//` Work on RouterFallback as well as FixedGlobalSpinner.....................
+
+const RouterFallback = () => {
+  return (
+    <div className='fixed inset-0'>
+      <span
+        className='absolute text-3xl font-black text-blue-500'
+        style={{
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%,-50%)'
+        }}
+      >
+        Loading...
+      </span>
+    </div>
+  )
+}
 
 function App() {
   return (
     <Fragment>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} fallbackElement={<RouterFallback />} />
     </Fragment>
   )
 }
