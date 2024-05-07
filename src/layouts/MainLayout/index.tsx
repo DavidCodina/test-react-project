@@ -16,8 +16,6 @@ import PageError from 'pages/PageError'
 // This fallback was used just for testing lazy + preloading, but obviously
 // you don't want a big dumb loading h1 every time something lazy loads.
 const Fallback = () => {
-  console.log('Fallback rendered...')
-
   return (
     <div className='mx-auto w-full flex-1 p-6 2xl:container'>
       <h1 className='tex-6xl py-5 text-center font-black text-red-500'>

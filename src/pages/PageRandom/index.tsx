@@ -21,7 +21,8 @@ const PageRandom = () => {
 
   // This is simply for the associated pageRandom.test.tsx in order to
   // demonstrate how to build out a mini data router when a component
-  // uses any associated data router methods.
+  // uses any associated data router methods. The actual value returned
+  // from the loader resolves to null.
   const loaderData = useLoaderData() as any
 
   /* ======================
@@ -44,8 +45,6 @@ const PageRandom = () => {
         backgroundImage: mode === 'dark' ? darkBackgroundImage : backgroundImage
       }}
     >
-      {/* <Waves /> */}
-
       <div className='relative mx-auto w-full flex-1 p-6 2xl:container'>
         <h1
           className='text-center text-5xl font-black'

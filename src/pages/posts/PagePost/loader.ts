@@ -28,7 +28,7 @@ export const LazyPagePost = lazyWithPreload(() => import('./'))
 // From what I can tell, .preload() will cache the import, so
 // that in subsequent requests it's essentially rendered synchronously.
 //
-// await is imortant here in order to block transitioning and avoid the
+// await is important here in order to block transitioning and avoid the
 // Supsense fallback. That said, in the following article you see
 // examples of him explicitly saying not to await.
 //
@@ -45,15 +45,14 @@ export const LazyPagePost = lazyWithPreload(() => import('./'))
 ///////////////////////////////////////////////////////////////////////////
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  const { postId } = params
+  const postId = params.postId as string
 
   // await import('utils')
   //   .then(async (module) => {
   //     module.log('Sleeping for three seconds.')
   //     await module.sleep(3000)
   //     return
-  //   })
-  //   .catch((err) => err)
+  //   }).catch((err) => err)
 
   await LazyPagePost.preload().then((component: any) => {
     return component

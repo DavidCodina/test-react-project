@@ -1,5 +1,19 @@
-// Third-party imports
-import axios from 'axios'
+type Post = {
+  userId: number
+  id: number
+  title: string
+  body: string
+}
+
+type Data = Post[] | null
+
+type GetPostsResponse = Promise<{
+  data: Data
+  success: boolean
+  message: string
+}>
+
+type GetPosts = () => GetPostsResponse
 
 /* ======================
       getPosts() 
@@ -19,39 +33,38 @@ import axios from 'axios'
 //
 //   export const getPosts = async () => {
 //     const res = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-//     return { data: res.data, success: true, message: 'Request success!', status: res?.request?.status || 200 }
+//     return { data: json, success: true, message: 'Request success.' }
 //   }
 //
 // The gotcha here is that we have to make sure we understand under what circumstances
 // our API is going to send us back an error. If there are any circumstances in which
 // we could get back a 200, but no data then that would be bad.
+//
 // See this Net Ninja video for examples of manually throwing an error:
 // https://www.youtube.com/watch?v=n0Rvia8w7p0&list=PL4cUxeGkcC9iVKmtNuCeIswnQ97in2GGf&index=8
 //
-// That said, in the PagePosts component, I'm catching the error and handling it there.
-//
 ///////////////////////////////////////////////////////////////////////////
 
-export const getPosts = async () => {
+export const getPosts: GetPosts = async () => {
+  // Replace try/catch below with this to see local error boundary get
+  // triggered when getPosts() errors.
+  // throw new Error('Whoop! You did a bad thing.')
+
   try {
-    // await sleep(3000)
-
-    const res = await axios.get(
-      //'https://jsonplaceholder.typicode.com/posts?_limit=10'
-      'https://jsonplaceholder.typicode.com/posts'
-    )
-
     // Simulate slow API
     // await import('utils')
     //   .then(async (module) => {
-    //     module.log('Sleeping for three seconds.')
+    //     module.log(' Sleeping for three seconds. ')
     //     await module.sleep(3000)
     //     return
-    //   })
-    //   .catch((err) => err)
+    //   }) .catch((err) => err)
+
+    const URL = 'https://jsonplaceholder.typicode.com/posts'
+    const res = await fetch(URL)
+    const json = (await res.json()) as Awaited<Data>
 
     return {
-      data: res.data,
+      data: json,
       success: true,
       message: 'Request success.'
     }

@@ -116,7 +116,7 @@ export const FixedGlobalSpinner = ({ delay = 0 }: { delay?: number }) => {
   const renderSpinner = () => {
     if (showSpinner) {
       return (
-        <div className='fixed inset-0'>
+        <div className='fixed inset-0' style={{ zIndex: 9999 }}>
           <div
             className='absolute'
             style={{

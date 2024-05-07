@@ -1,11 +1,25 @@
-// Third-party imports
-import axios from 'axios'
+type Post = {
+  userId: number
+  id: number
+  title: string
+  body: string
+}
+
+type Data = Post | null
+
+type GetPostResponse = Promise<{
+  data: Data
+  success: boolean
+  message: string
+}>
+
+type GetPost = (postId: string) => GetPostResponse
 
 /* ======================
-      getPost() 
+        getPost() 
 ====================== */
 
-export const getPost = async (postId?: string) => {
+export const getPost: GetPost = async (postId) => {
   try {
     // await import('utils')
     //   .then(async (module) => {
@@ -15,23 +29,20 @@ export const getPost = async (postId?: string) => {
     //   })
     //   .catch((err) => err)
 
-    const res = await axios.get(
-      `https://jsonplaceholder.typicode.com/posts/${postId}`
-    )
+    const URL = `https://jsonplaceholder.typicode.com/posts/${postId}`
+    const res = await fetch(URL)
+    const json = (await res.json()) as Awaited<Data>
 
     return {
-      data: res.data,
+      data: json,
       success: true,
-      message: 'Request success!',
-      status: res?.request?.status || 200
+      message: 'Request success.'
     }
-  } catch (err: any) {
-    //# Update this to use the utility function...
+  } catch (err) {
     return {
       data: null,
-      success: false,
-      message: 'Request failed!',
-      status: err?.request?.status || 500
+      message: 'Request failed.',
+      success: false
     }
   }
 }

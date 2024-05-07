@@ -186,6 +186,19 @@ export const CustomOffCanvas = ({
         <NavLink
           className={({ isActive }) => getClassName(isActive)}
           to={
+            location.pathname === '/posts' && location.search
+              ? `/posts${location.search}`
+              : '/posts'
+          }
+          onClick={handleClose}
+        >
+          <FontAwesomeIcon icon={faInfo} style={{ marginRight: 10 }} />
+          Posts
+        </NavLink>
+
+        <NavLink
+          className={({ isActive }) => getClassName(isActive)}
+          to={
             location.pathname === '/about' && location.search
               ? `/about${location.search}`
               : '/about'

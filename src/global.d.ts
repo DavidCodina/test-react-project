@@ -1,7 +1,13 @@
 // https://bobbyhadz.com/blog/typescript-make-types-global
 
 declare global {
-  type Test = 'Testing 123...'
+  type API_Response<T = unknown> = Promise<{
+    data: T
+    message: string
+    success: boolean
+    errors?: Record<string, string> | null
+  }>
+
   type Roles = 'user' | 'manager' | 'admin'
 
   // Used by Colors below.
