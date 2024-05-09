@@ -128,7 +128,6 @@ const PageHome = () => {
             Home
           </span>
         </h1>
-
         {/* <Title
           as='h1'
           style={{
@@ -140,9 +139,7 @@ const PageHome = () => {
         >
           Home
         </Title> */}
-
-        <HR style={{ marginBottom: 50 }} />
-
+        <HR style={{ marginBottom: 50 }} />\
         {/* 
         <Alert color='blue'>
           <Alert.Body>
@@ -162,7 +159,6 @@ const PageHome = () => {
           </Alert.Body>
         </Alert>
         */}
-
         {/* 
         <div className='flex items-center justify-center gap-2'>
           <div className='mb-2 flex justify-center'>
