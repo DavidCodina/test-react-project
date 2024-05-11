@@ -57,7 +57,8 @@ export const getPosts: GetPosts = async () => {
     //     module.log(' Sleeping for three seconds. ')
     //     await module.sleep(3000)
     //     return
-    //   }) .catch((err) => err)
+    //   })
+    //   .catch((err) => err)
 
     const URL = 'https://jsonplaceholder.typicode.com/posts'
     const res = await fetch(URL)

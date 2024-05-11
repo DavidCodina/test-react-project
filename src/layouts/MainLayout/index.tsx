@@ -7,23 +7,16 @@ import 'react-toastify/dist/ReactToastify.css'
 
 // Custom imports
 import { useThemeContext } from 'contexts'
-import { Menu } from './components/Menu'
-import {
-  /*GlobalSpinner, */ FixedGlobalSpinner
-} from './components/GlobalSpinner'
-import PageError from 'pages/PageError'
 
-// This fallback was used just for testing lazy + preloading, but obviously
-// you don't want a big dumb loading h1 every time something lazy loads.
-const Fallback = () => {
-  return (
-    <div className='mx-auto w-full flex-1 p-6 2xl:container'>
-      <h1 className='tex-6xl py-5 text-center font-black text-red-500'>
-        Thinking...
-      </h1>
-    </div>
-  )
-}
+import {
+  Menu,
+  FixedGlobalSpinner,
+  // GlobalSpinner,
+  SuspenseFallback
+  //
+} from './components'
+
+import PageError from 'pages/PageError'
 
 /* ========================================================================
                               MainLayout
@@ -69,7 +62,7 @@ export const MainLayout = () => {
           onError={handleError}
           onReset={handleReset}
         >
-          <FixedGlobalSpinner />
+          <FixedGlobalSpinner delay={750} />
 
           {/* The GlobalSpinner will run while any react-router-dom data loader is loading. 
           In the absence of GlobalSpinner, the default behavior of react-router-dom is to
@@ -95,7 +88,7 @@ export const MainLayout = () => {
                 fallbackElement={<div className='fixed inset-0 text-6xl'>Loading</div>} 
               />
              */}
-          <Suspense fallback={<Fallback />}>
+          <Suspense fallback={<SuspenseFallback />}>
             <Outlet context={{ test: 'Outlet value!' }} />
           </Suspense>
           {/* </GlobalSpinner> */}

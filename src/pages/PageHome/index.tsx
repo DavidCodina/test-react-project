@@ -139,7 +139,7 @@ const PageHome = () => {
         >
           Home
         </Title> */}
-        <HR style={{ marginBottom: 50 }} />\
+        <HR style={{ marginBottom: 50 }} />
         {/* 
         <Alert color='blue'>
           <Alert.Body>

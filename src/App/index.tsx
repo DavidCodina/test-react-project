@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { RouterProvider } from 'react-router-dom'
-import { router } from './router'
+import { router, RouterFallback } from './router'
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -52,26 +52,6 @@ import type {} from 'styled-components/cssprop'
 //# Add Switch, InputPhone, & React Date Picker (and/or ShadCDN).
 
 // Review: https://www.youtube.com/watch?v=kvOp1jffVKE
-
-//` Work on RouterFallback, FixedGlobalSpinner and the Suspense Fallback in MainLayout.tsx.
-//` Use PageAbout for testing against.
-
-const RouterFallback = () => {
-  return (
-    <div className='fixed inset-0'>
-      <span
-        className='absolute text-3xl font-black text-blue-500'
-        style={{
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%,-50%)'
-        }}
-      >
-        Loading...
-      </span>
-    </div>
-  )
-}
 
 function App() {
   return (
