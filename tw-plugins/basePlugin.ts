@@ -48,7 +48,6 @@ export const basePlugin = plugin(function (pluginApi) {
       // MainLayout overrides it based on light/dark theme.
       backgroundColor: 'var(--tw-body-color)',
       color: '#212529', // ???
-
       fontSize: '1rem', // fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
       fontWeight: '400',
       lineHeight: '1.5', // Preflight will already do this on html element, then body inherits it.

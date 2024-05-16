@@ -8,16 +8,15 @@ import { lazyWithPreload, sleep } from 'utils'
 // Then MainLayout.tsx will render the Suspense fallback for the duration
 // of the LazyPageAbout wait time.
 //
-///////////////////////////////////////////////////////////////////////////
-
-// export const LazyPageAbout = lazy(async () => {
-//   await sleep(3000)
-//   return import('./')
-// })
-// export const loader = async () => {
-//   await sleep(3000)
-//   return null
-// }
+//   export const LazyPageAbout = lazy(async () => {
+//     await sleep(3000)
+//     return import('./')
+//   })
+//
+//   export const loader = async () => {
+//     await sleep(3000)
+//     return null
+//   }
 //
 ///////////////////////////////////////////////////////////////////////////
 

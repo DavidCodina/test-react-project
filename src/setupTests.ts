@@ -2,8 +2,11 @@
 // The actual vitest example ONLY does this, and it works.
 // What Robin Wieruch does in his tutorial also works, but is unnecessary.
 
-// import '@testing-library/jest-dom'
-import '@testing-library/jest-dom/vitest' // Done in Mosh tutorial
+// Done in Mosh tutorial instead of '@testing-library/jest-dom'.
+// However, it seems you need to also do npm i -D @vitest/expect
+// https://github.com/testing-library/jest-dom?tab=readme-ov-file#with-vitest
+import '@testing-library/jest-dom/vitest'
+
 import ResizeObserver from 'resize-observer-polyfill'
 
 import { afterAll, afterEach, beforeAll } from 'vitest'
