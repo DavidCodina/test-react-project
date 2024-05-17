@@ -4,7 +4,8 @@ import {
   ComponentProps,
   ElementType,
   forwardRef,
-  ForwardedRef
+  ForwardedRef,
+  ReactNode
 } from 'react'
 import { useThemeContext } from 'contexts'
 import { twMerge } from 'tailwind.config'
@@ -22,6 +23,14 @@ type TitleOwnProps<T extends ElementType = ElementType> = {
 // the ones that we define.
 type TitleProps<U extends ElementType> = TitleOwnProps<U> &
   Omit<ComponentProps<U>, keyof TitleOwnProps>
+
+// Why are we also doing this? When assigned to the function definition
+// below, this is what will prevent the consumer from adding props/attributes
+// to the component that aren't part of the element's normal props.
+// For example if as='h2', you can't add a value prop.
+type TitleComponent = <C extends ElementType = typeof defaultElement>(
+  props: TitleProps<C>
+) => ReactNode
 
 const defaultElement = 'h1'
 
@@ -44,7 +53,7 @@ const defaultElement = 'h1'
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-export const Title = forwardRef(
+export const Title: TitleComponent = forwardRef(
   <E extends ElementType = typeof defaultElement>(
     props: TitleProps<E>,
     ref: ForwardedRef<any>
@@ -58,7 +67,8 @@ export const Title = forwardRef(
       children,
       color: _color = '',
       className = '',
-      style = {}
+      style = {},
+      ...otherProps
     } = props
 
     // In this case, it just so happens that I want the same default color when light/dark.
@@ -143,6 +153,7 @@ export const Title = forwardRef(
             ...style
           } as CSSProperties
         }
+        {...otherProps}
       >
         {children}
       </Component>

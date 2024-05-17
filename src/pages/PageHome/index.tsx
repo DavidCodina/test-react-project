@@ -2,7 +2,6 @@ import { useTitle } from 'hooks'
 import { HR, Waves } from 'components'
 import { useThemeContext } from 'contexts'
 
-import { TitleDemo } from 'components/Title/TitleDemo'
 const backgroundImage = `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='%23ddd6fe'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`
 const darkBackgroundImage = `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='%23083344'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`
 
@@ -57,8 +56,6 @@ const PageHome = () => {
         </h1>
 
         <HR style={{ marginBottom: 50 }} />
-
-        <TitleDemo />
 
         {/* <Alert className='alert-blue mx-auto mb-12 max-w-2xl flex-col'>
           <div className='text-center'>

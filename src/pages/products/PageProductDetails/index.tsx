@@ -1,4 +1,4 @@
-// Third-party imports
+import { useEffect } from 'react'
 import {
   useParams,
   useNavigate,
@@ -22,12 +22,15 @@ const PageProductDetails = () => {
   // https://reactrouter.com/docs/en/v6/upgrading/v5#use-usenavigate-instead-of-usehistory
   const navigate = useNavigate()
   const params = useParams()
+  // location.state persists across refreshes, but the data is not
+  // stored in the URL. For that reason, I generally avoid using this feature.
+  // navigate(`/products/${product.name}`, { state: { test: 'Testing 123...', productName: 'abc123' } })
   const location = useLocation()
 
   // https://reactrouter.com/docs/en/v6/api#usesearchparams
   // Will come back null if doesn't exist.
   // Shorthand: const productName = searchParams.get('name')
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, _setSearchParams] = useSearchParams()
 
   const { mode } = useThemeContext()
 
@@ -42,6 +45,10 @@ const PageProductDetails = () => {
   //   {}
   // )
 
+  useEffect(() => {
+    console.log('Page mounted.')
+  }, [])
+
   /* ======================
           return
   ====================== */
@@ -54,8 +61,6 @@ const PageProductDetails = () => {
         backgroundImage: mode === 'dark' ? darkBackgroundImage : backgroundImage
       }}
     >
-      {/* <Waves /> */}
-
       <div className='relative mx-auto w-full flex-1 p-6 2xl:container'>
         <h1
           className='text-center text-5xl font-black'
@@ -97,10 +102,10 @@ const PageProductDetails = () => {
         </h1>
 
         {/* Calling navigate(-1) will take the user back to the previous page.
-      Here we are assuming that the previous page is actually ProductsListPage,
-      but this may not necessarily be the case. For that reason it's really better
-      to say something generic like 'Previous Page' or 'Go Back'. Conversely,
-      if we ALWAYS wanted to go back to ProductsListPage then use '/products' instead. */}
+        Here we are assuming that the previous page is actually ProductsListPage,
+        but this may not necessarily be the case. For that reason it's really better
+        to say something generic like 'Previous Page' or 'Go Back'. Conversely,
+        if we ALWAYS wanted to go back to ProductsListPage then use '/products' instead. */}
         <Button
           className='btn-blue btn-sm mx-auto mb-6 block'
           onClick={() => navigate(-1)}
@@ -112,7 +117,8 @@ const PageProductDetails = () => {
 
         <article className='mb-6 rounded-lg border border-gray-500 bg-white p-3 text-sm'>
           <p className='mb-0'>
-            Product name from <code>searchParams</code> not <code>params</code>:{' '}
+            Here is the product name from <code>searchParams</code>, not{' '}
+            <code>params</code>:{' '}
             {productName ? (
               <strong className='font-bold text-blue-500'>{productName}</strong>
             ) : (
@@ -127,23 +133,27 @@ const PageProductDetails = () => {
 
         <div className='mb-6 flex justify-center gap-4'>
           <Button
+            className='btn-blue btn-sm'
             onClick={() => {
-              //# I don't want this to create a new entry in history.
-              //# Instead I want it to replace it...............
-              setSearchParams({ id: '999', name: 'Cocoa Crap Balls' })
+              // I don't want this to create a new entry in history. Instead I want it to replace it.
+              // So don't do this: setSearchParams({ id: '999', name: 'Cocoa Crap Balls' })
+              // Note also that the useEffect above will not rerun the console.log(), proving that
+              // the page does not remount.
+              navigate('?id=999&name=Cocoa+Crap+Balls', {
+                replace: true
+              })
             }}
-            color='blue'
           >
             Change Search Params
           </Button>
 
           <Button
+            className='btn-blue btn-sm'
             onClick={() => {
-              //# I don't want this to create a new entry in history.
-              //# Instead I want it to replace it...............
-              setSearchParams({})
+              navigate('', {
+                replace: true
+              })
             }}
-            color='blue'
           >
             Clear Search Params
           </Button>

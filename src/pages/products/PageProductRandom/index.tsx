@@ -9,6 +9,7 @@ const darkBackgroundImage = `url("data:image/svg+xml,%3csvg xmlns='http://www.w3
 /* =============================================================================
                                   PageProductRandom
 ============================================================================= */
+// This page merely demonstrates that the associated route has priority over '/products/:id'.
 
 const PageProductRandom = () => {
   const { mode } = useThemeContext()
@@ -25,8 +26,6 @@ const PageProductRandom = () => {
         backgroundImage: mode === 'dark' ? darkBackgroundImage : backgroundImage
       }}
     >
-      {/* <Waves /> */}
-
       <div className='relative mx-auto w-full flex-1 p-6 2xl:container'>
         <h1
           className='text-center text-5xl font-black'

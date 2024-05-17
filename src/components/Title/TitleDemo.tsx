@@ -39,6 +39,8 @@ export const TitleDemo = () => {
         marginBottom: 50,
         textAlign: 'center'
       }}
+      // value='abc123' // Only allowed for as="input"
+
       // className='dark:text-red-500'
       // color='red'
     >
