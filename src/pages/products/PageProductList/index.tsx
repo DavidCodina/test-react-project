@@ -128,7 +128,6 @@ const PageProductList = () => {
                         // location.state persists across refreshes, but the data is not
                         // stored in the URL. For that reason, I generally avoid using this feature.
                         state: {
-                          test: 'Testing 123...',
                           productName: product.name
                         }
                       })

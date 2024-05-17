@@ -135,13 +135,28 @@ const PageProductDetails = () => {
           <Button
             className='btn-blue btn-sm'
             onClick={() => {
+              ///////////////////////////////////////////////////////////////////////////
+              //
               // I don't want this to create a new entry in history. Instead I want it to replace it.
               // So don't do this: setSearchParams({ id: '999', name: 'Cocoa Crap Balls' })
               // Note also that the useEffect above will not rerun the console.log(), proving that
-              // the page does not remount.
-              navigate('?id=999&name=Cocoa+Crap+Balls', {
-                replace: true
-              })
+              // the page does not remount. The naive approach would be to do this:
+              //
+              //   navigate('?id=999&name=Cocoa+Crap+Balls', { replace: true })
+              //
+              // However, we want to preserve any preexisting search params.
+              //
+              ///////////////////////////////////////////////////////////////////////////
+
+              const customSearchParams = new URLSearchParams(location.search)
+              customSearchParams.set('id', '999')
+              customSearchParams.set('name', 'Cocoa Crap Balls')
+
+              // Calling .toString() on a URLSearchParams will automatically add the '&'.
+              navigate(
+                location.pathname + '?' + customSearchParams.toString(),
+                { replace: true }
+              )
             }}
           >
             Change Search Params
@@ -150,6 +165,7 @@ const PageProductDetails = () => {
           <Button
             className='btn-blue btn-sm'
             onClick={() => {
+              // In this case, if our intention is to wipe ALL search params, we can simply do this:
               navigate('', {
                 replace: true
               })
