@@ -1,90 +1,21 @@
 // Third-party imports
-import { ComponentProps, Fragment, useState, useEffect } from 'react'
+import { Fragment, useState } from 'react'
 
 // Custom imports
 import { Button } from 'components'
-
-interface ICollapse extends ComponentProps<'div'> {
-  duration?: number
-  show: boolean
-}
+import { SimpleCollapse } from './'
 
 /* ========================================================================
-                              SimpleCollapse
-======================================================================== */
-// https://www.youtube.com/watch?v=B_n4YONte5A
-// https://keithjgrant.com/posts/2023/04/transitioning-to-height-auto/#:~:text=For%20this%20approach%2C%20wrap%20the,max%2Dheight%20work%20inside%20flexbox.
-// At it's core this solution is all CSS.
-// However, we don't actually want the content container to remain overflow:hidden in it's open state.
-// Why? Because then we couldn't apply shadows, or ever use anything that would otherwise pop out
-// of the container like a dropdown, etc. Thus, a useEffect() has been added to conditionally
-// add/remove this.
 
-//# I think the Keith Grant article also has a flexbox version...
-
-const SimpleCollapse = ({
-  children,
-  className = '',
-  duration = 300,
-  show = false,
-  style = {},
-  ...otherProps
-}: ICollapse) => {
-  const [contentStyle, setContentStyle] = useState(() => {
-    if (show) {
-      return {}
-    }
-    return {
-      overflow: 'hidden'
-    }
-  })
-
-  /* ======================
-         useEffect()
-  ====================== */
-
-  useEffect(() => {
-    if (show) {
-      setTimeout(() => {
-        setContentStyle({})
-      }, duration)
-      return
-    }
-    setContentStyle({ overflow: 'hidden' })
-  }, [duration, show])
-
-  /* ======================
-          return
-  ====================== */
-
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        display: 'grid',
-        transition: `grid-template-rows ${duration}ms linear`,
-        gridTemplateRows: show ? '1fr' : '0fr'
-      }}
-      {...otherProps}
-    >
-      <div style={contentStyle}>{children}</div>
-    </div>
-  )
-}
-
-/* ========================================================================
-                              AnimateAutoDemo
 ======================================================================== */
 
-export const AnimateAutoDemo = () => {
+export const SimpleCollapseDemo = () => {
   const [show, setShow] = useState(false)
 
   return (
     <Fragment>
       <Button
         className='btn-blue btn-sm mx-auto mb-4 block'
-        //! color={show ? 'rose' : 'green'}
         onClick={() => {
           setShow((v) => !v)
         }}

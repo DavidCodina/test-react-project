@@ -41,9 +41,9 @@ import type {} from 'styled-components/cssprop'
 /* ========================================================================
 
 ======================================================================== */
-//# ❓ Implement use-context-selector on AppContext and maybe also ThemeContext.
+//# Clean up homepage and abstract examples into separate files.
 
-//# ❓ Move SimpleCollapse to components directory.
+//# ❓ Implement use-context-selector on AppContext and maybe also ThemeContext.
 
 //# Add React Image Preview (I think latest is in Next eCommerce), React Skeleton, withUnmounter, etc.
 
