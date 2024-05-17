@@ -190,7 +190,7 @@ describe('PagePosts', () => {
 
   ====================== */
 
-  it("should render 'Testing 123...'", async () => {
+  test("should render 'Posts'", async () => {
     const miniRouter = createMiniRouter({
       element: <PagePosts />, // No need to use LazyPagePosts for the test.
       loader: mockLoader // Better to use mockLoader rather than actual loader.
@@ -198,12 +198,15 @@ describe('PagePosts', () => {
     render(miniRouter)
 
     // Gotcha! This won't work:
-    // const title = await screen.getByText('Testing 123...')
+    // const title = await screen.getAllByText('Posts')
     // The reason is most likely because react-router-dom initializes
     // with some amount of state changes, which ultimately create an
     // asynchronous gap. This is not necessarily related to the loader,
     // or lazy loading.
-    const title = await screen.findByText('Testing 123...')
-    expect(title).toBeInTheDocument()
+
+    // In this case, 'Posts' is also found in the offcanvas menu.
+    const title = await screen.findAllByText('Posts')
+    // expect(title.length).toBe(3)
+    expect(title).toHaveLength(3)
   })
 })

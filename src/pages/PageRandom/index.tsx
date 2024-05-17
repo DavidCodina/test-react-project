@@ -74,8 +74,6 @@ const PageRandom = () => {
         </h1>
 
         <HR style={{ marginBottom: 50 }} />
-
-        <h2>Random</h2>
       </div>
     </div>
   )

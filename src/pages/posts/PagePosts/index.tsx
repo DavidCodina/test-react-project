@@ -161,8 +161,6 @@ function PagePosts() {
         </Button>
 
         {renderPosts()}
-
-        <div>Testing 123...</div>
       </div>
     </div>
   )

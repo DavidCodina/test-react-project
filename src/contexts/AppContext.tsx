@@ -54,16 +54,16 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
     setPrevPath(prevPathRef.current)
     setCurrentPath(currentPathRef.current)
 
-    console.log(
-      `\n${JSON.stringify(
-        {
-          currentPath: currentPathRef.current,
-          prevPath: prevPathRef.current
-        },
-        null,
-        2
-      )}\n`
-    )
+    // console.log(
+    //   `\n${JSON.stringify(
+    //     {
+    //       currentPath: currentPathRef.current,
+    //       prevPath: prevPathRef.current
+    //     },
+    //     null,
+    //     2
+    //   )}\n`
+    // )
   }, [href])
 
   /* ======================

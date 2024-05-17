@@ -37,11 +37,18 @@ describe('PageRandom', () => {
     // If that's not it, then it could potentially be something in the internal
     // operations of React Router.
     //
+    //   const title = await screen.findByRole('heading', { level: 2, name: 'Random' })
+    //   expect(title).toBeInTheDocument()
+    //
+    // Update:
+    //
+    // The word 'Random' is no longer in a menu <NavLink/>. However, the title being used
+    // actually now has two instances of 'Random', so we need to use findAllByText().
+    //
     ///////////////////////////////////////////////////////////////////////////
-    const title = await screen.findByRole('heading', {
-      level: 2,
-      name: 'Random'
-    })
-    expect(title).toBeInTheDocument()
+
+    const title = await screen.findAllByText('Random')
+    // expect(title.length).toBe(2)
+    expect(title).toHaveLength(2)
   })
 })
