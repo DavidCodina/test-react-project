@@ -1,5 +1,11 @@
 // Custom imports
-import { CSSProperties, ComponentProps, ElementType, ReactNode } from 'react'
+import {
+  CSSProperties,
+  ComponentProps,
+  ElementType,
+  forwardRef,
+  ForwardedRef
+} from 'react'
 import { useThemeContext } from 'contexts'
 import { twMerge } from 'tailwind.config'
 
@@ -8,10 +14,7 @@ import { twMerge } from 'tailwind.config'
 
 type TitleOwnProps<T extends ElementType = ElementType> = {
   as?: T
-  children: ReactNode
-  className?: string
   color?: string
-  style?: CSSProperties
 }
 
 // TitleProps includes everything in TitleOwnProps & combines that with
@@ -23,50 +26,54 @@ type TitleProps<U extends ElementType> = TitleOwnProps<U> &
 const defaultElement = 'h1'
 
 /* =============================================================================
-                                Title
+                                  Title
 ============================================================================= */
 ////////////////////////////////////////////////////////////////////////////////
 //
-// The implementation of Title highlights the nature of the cascade in Tailwind
-// projects. Generally, we want Tailwind to be load first, then any component-specific
-// stylesheets. Finally, we want React inline styles to have the highest level of
-// priority. Generally, we do NOT want to set important:true in tailwind.config.js.
+// Initially, this syntax was used:
 //
-// All of that being the case, it means that any component-level styles.css will
-// have a stronger priority than any Tailwind classes with equal specificity.
-// This is why we generally want to AVOID USING COMPONENT stylesheets in Tailwind
-// projects. Why? Because it will block any similar Tailwind styles.
+//   export function Title<E extends ElementType = typeof defaultElement>(props: TitleProps<E>) { ... }
+//
+// But then switched to this in order to implement the forwardRef:
+//
+//   export const Title = forwardRef(<E extends ElementType = typeof defaultElement>(props: TitleProps<E>,ref: ForwardedRef<any>) => { ... }
+//
+// The React.ForwardedRef type is what glues it all together. In previous polymorphic
+// implementations with forwardRef I followed this implementation, which gets way too complex:
+// https://blog.logrocket.com/build-strongly-typed-polymorphic-components-react-typescript/
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-export function Title<E extends ElementType = typeof defaultElement>(
-  props: TitleProps<E>
-) {
-  const { mode } = useThemeContext()
+export const Title = forwardRef(
+  <E extends ElementType = typeof defaultElement>(
+    props: TitleProps<E>,
+    ref: ForwardedRef<any>
+  ) => {
+    const { mode } = useThemeContext()
 
-  // Initially, I tried destructuring from within the function args, but
-  // Typescript gets confused about Component.
-  const {
-    as: Component = defaultElement,
-    children,
-    color: _color = '',
-    className = '',
-    style = {}
-  } = props
+    // Initially, I tried destructuring from within the function args, but
+    // Typescript gets confused about Component.
+    const {
+      as: Component = defaultElement,
+      children,
+      color: _color = '',
+      className = '',
+      style = {}
+    } = props
 
-  // In this case, it just so happens that I want the same default color when light/dark.
-  const color = _color
-    ? _color
-    : mode === 'dark'
-      ? 'var(--tw-dark-primary-color)'
-      : 'var(--tw-dark-primary-color)'
+    // In this case, it just so happens that I want the same default color when light/dark.
+    const color = _color
+      ? _color
+      : mode === 'dark'
+        ? 'var(--tw-dark-primary-color)'
+        : 'var(--tw-dark-primary-color)'
 
-  /* ======================
+    /* ======================
         getClassName()
   ====================== */
 
-  const getClassName = () => {
-    const base = `
+    const getClassName = () => {
+      const base = `
       m-0
       dark:text-[var(--tw-dark-bg-color)]
       text-white 
@@ -80,28 +87,35 @@ export function Title<E extends ElementType = typeof defaultElement>(
       ease-linear
     `
 
-    const _className = twMerge(base, className)
+      const _className = twMerge(base, className)
 
-    return _className
-  }
+      return _className
+    }
 
-  /* ======================
+    /* ======================
           return
   ====================== */
 
-  return (
-    <Component
-      className={getClassName()}
-      style={
-        {
-          // If the user explicitly passes in a color, then it will be used always.
-          // If they want it to change based on mode, then they need to handle that
-          // on the consuming side.
-          WebkitTextStrokeColor: color,
-          WebkitTextStrokeWidth: 1,
-          textShadow:
-            mode === 'dark'
-              ? `
+    return (
+      <Component
+        className={getClassName()}
+        ref={(node) => {
+          if (ref && 'current' in ref) {
+            ref.current = node
+          } else if (typeof ref === 'function') {
+            ref?.(node)
+          }
+        }}
+        style={
+          {
+            // If the user explicitly passes in a color, then it will be used always.
+            // If they want it to change based on mode, then they need to handle that
+            // on the consuming side.
+            WebkitTextStrokeColor: color,
+            WebkitTextStrokeWidth: 1,
+            textShadow:
+              mode === 'dark'
+                ? `
         0 1px 0 hsl(217, 0%, 20%), 
         0 2px 0 hsl(217, 0%, 19%),
         0 3px 0 hsl(217, 0%, 18%), 
@@ -113,7 +127,7 @@ export function Title<E extends ElementType = typeof defaultElement>(
         0px 10px 2px rgba(16, 16, 16, 0.2),
         0px 12px 4px rgba(16, 16, 16, 0.2)
         `
-              : `
+                : `
         0 1px 0 hsl(174, 5%, 86%),
         0 2px 0 hsl(174, 5%, 84%),
         0 3px 0 hsl(174, 5%, 82%),
@@ -126,11 +140,12 @@ export function Title<E extends ElementType = typeof defaultElement>(
         0px 10px 2px rgba(16, 16, 16, 0.2),
         0px 12px 4px rgba(16, 16, 16, 0.2)
         `,
-          ...style
-        } as CSSProperties
-      }
-    >
-      {children}
-    </Component>
-  )
-}
+            ...style
+          } as CSSProperties
+        }
+      >
+        {children}
+      </Component>
+    )
+  }
+)
