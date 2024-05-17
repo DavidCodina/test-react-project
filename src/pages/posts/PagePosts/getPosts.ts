@@ -1,3 +1,5 @@
+import { sleep, randomFail } from 'utils'
+
 type Post = {
   userId: number
   id: number
@@ -46,6 +48,16 @@ type GetPosts = () => GetPostsResponse
 ///////////////////////////////////////////////////////////////////////////
 
 export const getPosts: GetPosts = async () => {
+  await sleep(1500)
+
+  if (randomFail(0.5)) {
+    return {
+      data: null,
+      message: 'Request failed.',
+      success: false
+    }
+  }
+
   // Replace try/catch below with this to see local error boundary get
   // triggered when getPosts() errors.
   // throw new Error('Whoop! You did a bad thing.')
