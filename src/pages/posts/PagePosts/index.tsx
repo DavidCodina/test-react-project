@@ -40,6 +40,9 @@ const darkBackgroundImage = `url("data:image/svg+xml,%3csvg xmlns='http://www.w3
 //    That said, such an approach seems kind of heavy handed. More than likey,
 //    we wouldn't want to replace our ENTIRE page.
 //
+// That said, it's pretty clunky to use. I wouldn't recommend it, but still
+// wanted to make an example.
+//
 ///////////////////////////////////////////////////////////////////////////
 
 const PagePosts = () => {
@@ -165,7 +168,7 @@ const PagePosts = () => {
                   onClick={() => {
                     navigate(`/posts/${post.id}`)
                   }}
-                  // If using a <button> instead:
+                  // If using a <div> instead:
                   // Visible, non-interactive elements with click handlers must have
                   // at least one keyboard listener.eslintjsx-a11y/click-events-have-key-events)
                   // onKeyDown={(e) => { console.log(e) }}

@@ -1,3 +1,5 @@
+import { sleep, randomFail } from 'utils'
+
 type Post = {
   userId: number
   id: number
@@ -21,6 +23,7 @@ type GetPost = (postId: string) => GetPostResponse
 
 export const getPost: GetPost = async (postId) => {
   try {
+    await sleep(1500)
     // await import('utils')
     //   .then(async (module) => {
     //     module.log('Sleeping for three seconds...')
@@ -28,6 +31,14 @@ export const getPost: GetPost = async (postId) => {
     //     return
     //   })
     //   .catch((err) => err)
+
+    if (randomFail(0.5)) {
+      return {
+        data: null,
+        message: 'Request failed.',
+        success: false
+      }
+    }
 
     const URL = `https://jsonplaceholder.typicode.com/posts/${postId}`
     const res = await fetch(URL)
