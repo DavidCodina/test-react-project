@@ -171,6 +171,7 @@ describe('PagePosts', () => {
     // This might not be a good idea because there might be other <ul> JSX
     // related to the offCanvas, etdc.
     const list = await screen.findByRole('list')
+
     expect(list).toBeInTheDocument()
 
     // Get all list items within the list and check there are the expected number.

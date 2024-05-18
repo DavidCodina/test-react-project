@@ -23,7 +23,7 @@ type GetPost = (postId: string) => GetPostResponse
 
 export const getPost: GetPost = async (postId) => {
   try {
-    await sleep(1500)
+    // await sleep(1500)
     // await import('utils')
     //   .then(async (module) => {
     //     module.log('Sleeping for three seconds...')
@@ -32,13 +32,14 @@ export const getPost: GetPost = async (postId) => {
     //   })
     //   .catch((err) => err)
 
-    if (randomFail(0.5)) {
-      return {
-        data: null,
-        message: 'Request failed.',
-        success: false
-      }
-    }
+    // Note: this will break associated tests.
+    // if (randomFail(0.5)) {
+    //   return {
+    //     data: null,
+    //     message: 'Request failed.',
+    //     success: false
+    //   }
+    // }
 
     const URL = `https://jsonplaceholder.typicode.com/posts/${postId}`
     const res = await fetch(URL)
