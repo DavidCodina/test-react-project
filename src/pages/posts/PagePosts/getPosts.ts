@@ -49,6 +49,13 @@ type GetPosts = () => GetPostsResponse
 
 export const getPosts: GetPosts = async () => {
   await sleep(1500)
+  // Simulate slow API
+  // await import('utils')
+  //   .then(async (module) => {
+  //     module.log(' Sleeping for three seconds. ')
+  //     await module.sleep(3000)
+  //     return
+  //   }).catch((err) => err)
 
   if (randomFail(0.5)) {
     return {
@@ -56,22 +63,11 @@ export const getPosts: GetPosts = async () => {
       message: 'Request failed.',
       success: false
     }
+    // Do this instead to see local error boundary get triggered when getPosts() errors.
+    // throw new Error('Whoop! You did a bad thing.')
   }
 
-  // Replace try/catch below with this to see local error boundary get
-  // triggered when getPosts() errors.
-  // throw new Error('Whoop! You did a bad thing.')
-
   try {
-    // Simulate slow API
-    // await import('utils')
-    //   .then(async (module) => {
-    //     module.log(' Sleeping for three seconds. ')
-    //     await module.sleep(3000)
-    //     return
-    //   })
-    //   .catch((err) => err)
-
     const URL = 'https://jsonplaceholder.typicode.com/posts'
     const res = await fetch(URL)
     const json = (await res.json()) as Awaited<Data>

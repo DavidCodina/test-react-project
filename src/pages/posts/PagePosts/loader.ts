@@ -1,6 +1,6 @@
 import {
   LoaderFunction
-  // LoaderFunctionArgs,
+  // LoaderFunctionArgs
   // defer
 } from 'react-router-dom'
 import { getPosts } from './getPosts'
@@ -35,27 +35,26 @@ export const LazyPagePosts = lazyWithPreload(() => import('./'))
 //
 ///////////////////////////////////////////////////////////////////////////
 
-export const loader = (async () =>
-  /*{ context, params, request } /* : LoaderFunctionArgs */
-  {
-    // await import('utils')
-    //   .then(async (module) => {
-    //     module.log(' Sleeping for 3 seconds. ')
-    //     await module.sleep(3000)
-    //     return
-    //   }).catch((err) => err)
+// export const loader = (async ({ context, params, request }: LoaderFunctionArgs) => {
+export const loader = (async () => {
+  // await import('utils')
+  //   .then(async (module) => {
+  //     module.log(' Sleeping for 3 seconds. ')
+  //     await module.sleep(3000)
+  //     return
+  //   }).catch((err) => err)
 
-    await LazyPagePosts.preload().then((component: any) => {
-      return component
-    })
+  await LazyPagePosts.preload().then((component: any) => {
+    return component
+  })
 
-    return getPosts()
+  return getPosts()
 
-    // Using satisfies LoaderFunction works better than const loader: LoaderFunction = async () => {}
-    // Otherwise the PostsLoaderData below becomes: DataFunctionValue
-    // type DataFunctionValue = Response | NonNullable<unknown> | null;
-    // Alternatively, just use LoaderFunctionArgs
-  }) satisfies LoaderFunction
+  // Using satisfies LoaderFunction works better than const loader: LoaderFunction = async () => {}
+  // Otherwise the PostsLoaderData below becomes: DataFunctionValue
+  // type DataFunctionValue = Response | NonNullable<unknown> | null;
+  // Alternatively, just use LoaderFunctionArgs
+}) satisfies LoaderFunction
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -66,6 +65,7 @@ export const loader = (async () =>
 //   await LazyPagePosts.preload().then((component: any) => {
 //     return component
 //   })
+//
 //   return defer({ result: getPosts() })
 // }) satisfies LoaderFunction
 //
