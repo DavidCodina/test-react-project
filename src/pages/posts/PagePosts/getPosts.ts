@@ -1,4 +1,4 @@
-import { sleep, randomFail } from 'utils'
+// import { sleep, randomFail } from 'utils'
 
 type Post = {
   userId: number
