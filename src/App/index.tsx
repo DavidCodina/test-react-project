@@ -41,7 +41,7 @@ import type {} from 'styled-components/cssprop'
 /* ========================================================================
 
 ======================================================================== */
-//# Add Git  pre-push hook!
+//# Review pre-push hook!
 
 //# ❓ Implement use-context-selector on AppContext and maybe also ThemeContext.
 
@@ -51,7 +51,6 @@ import type {} from 'styled-components/cssprop'
 
 //# Add Switch, InputPhone, & React Date Picker (and/or ShadCDN).
 
-const x = 2
 // Review: https://www.youtube.com/watch?v=kvOp1jffVKE
 
 function App() {
