@@ -41,7 +41,7 @@ import type {} from 'styled-components/cssprop'
 /* ========================================================================
 
 ======================================================================== */
-//# Clean up homepage and abstract examples into separate files.
+//# Add GitHub pre-commit and pre-push hooks.
 
 //# ❓ Implement use-context-selector on AppContext and maybe also ThemeContext.
 
