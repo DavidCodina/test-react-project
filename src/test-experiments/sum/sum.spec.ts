@@ -51,6 +51,6 @@ describe('The sum() function...', () => {
     const result = sum(...values)
 
     // Assert
-    expect(result).toBe(expected)
+    expect(result).not.toBe(expected) //! Not is temporary.
   })
 })

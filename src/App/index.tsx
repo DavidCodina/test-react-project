@@ -41,7 +41,7 @@ import type {} from 'styled-components/cssprop'
 /* ========================================================================
 
 ======================================================================== */
-//# Add GitHub pre-commit and pre-push hooks!
+//# Add Git  pre-push hook!
 
 //# ❓ Implement use-context-selector on AppContext and maybe also ThemeContext.
 
