@@ -1,4 +1,9 @@
 # The name of this file can be anyting but needs to be .yml
+# This workflow is intended to work in conjunction with a
+# a branch protection rule that checks:
+# 1. Require a pull request before merging
+# 2. Require status checks to pass before merging.
+#    where the status check is the "Build, Lint & Test"
 name: Test
 
 on:
