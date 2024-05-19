@@ -1,16 +1,13 @@
 # The name of this file can be anyting but needs to be .yml
 name: Test
 
-# Whenever someone pushes to branch main then run the following job.
 on:
-  push:
-    branches:
-      - main
-      - development
   pull_request: # push
     branches:
       - main
       - development
+
+  # workflow_dispatch:
 
 # https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 jobs:
@@ -34,13 +31,13 @@ jobs:
         run: npm ci
       - name: Build Project
         run: npm run build --if-present
-      - name: Lint src
+      - name: Lint
         run: npm run lint
       - name: Run Tests
         run: npm run test:run
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Fake Deploy
-        run: echo Pretend deploying...
+  # deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Fake Deploy
+  #       run: echo Pretend deploying...
