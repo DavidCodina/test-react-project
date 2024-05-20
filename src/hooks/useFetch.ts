@@ -66,6 +66,9 @@ const defaultErrorResponse = {
 //
 //   const { data, loading, error, refetch, abort, status } = useFetch<Data>('/api/products')
 //
+//
+// See also https://github.com/dai-shi/react-hooks-fetch
+//
 ///////////////////////////////////////////////////////////////////////////
 
 export function useFetch<T = unknown>(

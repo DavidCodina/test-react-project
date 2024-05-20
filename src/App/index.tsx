@@ -41,13 +41,7 @@ import type {} from 'styled-components/cssprop'
 /* ========================================================================
 
 ======================================================================== */
-//# feature-5:
-
 //# Review pre-push hook!
-
-//# Create a pre-merge-commit hooks that works similar to pre-commit.
-
-//# ❓ Implement use-context-selector on AppContext and maybe also ThemeContext.
 
 //# Add React Image Preview (I think latest is in Next eCommerce), React Skeleton, withUnmounter, etc.
 
