@@ -1,6 +1,6 @@
 'use client'
 
-import { useAppContext } from 'contexts'
+import { useAppContextSelector } from 'contexts'
 import { Navicon } from 'components'
 import { CustomOffCanvas } from './CustomOffCanvas'
 
@@ -8,10 +8,11 @@ import { CustomOffCanvas } from './CustomOffCanvas'
                                 Menu
 ======================================================================== */
 // AppProvider and AuthProvider are implemented inside of RootLayout, which
-// means this is the first place we can actually consume those contexts.
+// means this is the first place we can clearactually consume those contexts.
 
 export const Menu = () => {
-  const { showMenu, setShowMenu } = useAppContext()
+  const showMenu = useAppContextSelector('showMenu')
+  const setShowMenu = useAppContextSelector('setShowMenu')
 
   /* ======================
           return

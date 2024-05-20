@@ -41,10 +41,7 @@ import type {} from 'styled-components/cssprop'
 /* ========================================================================
 
 ======================================================================== */
-
 //# Review pre-push hook!
-
-//# ❓ Implement use-context-selector on AppContext and maybe also ThemeContext.
 
 //# Add React Image Preview (I think latest is in Next eCommerce), React Skeleton, withUnmounter, etc.
 
