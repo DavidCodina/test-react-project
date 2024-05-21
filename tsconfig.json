@@ -1,4 +1,8 @@
 {
+  // "typedocOptions": {
+  //   "entryPoints": ["src/components", "src/hooks"],
+  //   "out": "docs"
+  // },
   "compilerOptions": {
     "target": "ES2020",
     "noUncheckedIndexedAccess": true, // https://www.youtube.com/watch?v=OQIsQDFtEnI
