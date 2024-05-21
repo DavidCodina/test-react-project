@@ -53,4 +53,13 @@ describe('The sum() function...', () => {
     // Assert
     expect(result).toBe(expected)
   })
+
+  // Use toBeCloseTo to compare floating-point numbers.
+  // https://www.youtube.com/watch?v=qTXwRSksJPg
+  test('should NOT return 0.3', () => {
+    const expected = 0.3
+    const result = sum(0.1, 0.2) // => 0.30000000000000004
+
+    expect(result).not.toBe(expected)
+  })
 })

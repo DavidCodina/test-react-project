@@ -70,29 +70,40 @@ import { ButtonProps, ButtonRef } from './types'
 // The @param descriptions should match any similar descriptions defined within ButtonProps.
 // For more info on JSDoc + React see here:
 // https://medium.com/@sanchit0496/how-to-integrate-jsdoc-in-react-js-application-e16c97635e5c
-// https://www.inkoop.io/blog/a-guide-to-js-docs-for-react-js/ d d
+// https://www.inkoop.io/blog/a-guide-to-js-docs-for-react-js/
+
+//
+// In JSDoc we would put the type information in the comment:
+//
+//   @param {Object} props - The props for the Button component.
+//   @param {React.ReactNode?} props.leftSection The leftSection (optional).
+//   @param {React.ReactNode?} props.rightSection The rightSection (optional).
+//   @param {boolean?} props.loading A boolean that determines if the component is shown as loading (optional).
+//   @param {React.CSSProperties?} props.loadingStyle A React.CSSProperties style object (optional).
+//   @param {string?} props.loadingClassName A string that provides classes  (optional).
+//   @param {React.ReactNode?} props.loader A loader to show instead of the default one (optional).
+//   @param {boolean?} props.isIconOnly A boolean that informs the component that only an icon is being used (optional).
+//   @returns {JSX.Element} The rendered button component.
+//
+// Howevever, in TSDoc, the type information is already specified by Typescript, so
+// we don't need to do that. Also for React components with TSDoc, you typically
+// document the properties of an interface rather than the component itself. Still,
+// we might want to provide an @example, or some additional comment.
+//
+// Because there are some differences between JSDoc and TSDoc, it's best to use eslint-plugin-tsdoc.
 //
 ///////////////////////////////////////////////////////////////////////////
 
 /**
- * In addition to the props listed below, Button can take a ref and any standard React &#60;button&#62; props.
+ * In addition to the props explicitly typed, Button can take a ref and any standard React &#60;button&#62; props.
  *
  * @example
- *
- *   <Button
- *     className="btn-blue btn-sm"
- *     onClick={() => console.log("Clicked.")}
- *   >Click Me</Button>
- *
- * @param {Object} props - The props for the Button component.
- * @param {React.ReactNode} [props.leftSection=null] The leftSection (optional).
- * @param {React.ReactNode} [props.rightSection=null] The rightSection (optional).
- * @param {boolean} [props.loading=false] A boolean that determines if the component is shown as loading (optional).
- * @param {React.CSSProperties} [props.loadingStyle] A React.CSSProperties style object (optional).
- * @param {string} [props.loadingClassName=''] A string that provides classes  (optional).
- * @param {React.ReactNode} [props.loader=null] A loader to show instead of the default one (optional).
- * @param {boolean} [props.isIconOnly] A boolean that informs the component that only an icon is being used (optional).
- * @returns {JSX.Element} The rendered button component.
+ * ```tsx
+ * <Button
+ *   className="btn-blue btn-sm"
+ *   onClick={() => console.log('Clicked.')}
+ * >Click Me<Button>
+ * ```
  */
 
 export const Button = forwardRef<ButtonRef, ButtonProps>(

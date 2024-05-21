@@ -4,14 +4,13 @@ export interface NumberFormatterProps
   extends Omit<ComponentPropsWithoutRef<'span'>, 'defaultValue'> {
   /** Value to format */
   value?: number | string
+  defaultValue?: string | number
 
-  defaultValue?: string | number //* Added
-
-  /** react-number-format defaults to 'input'. Mantine defaults to 'text'. */
-  displayType?: 'text' | 'input' //* Added
+  /** react-number-format defaults to `input`. Mantine defaults to `text`. */
+  displayType?: 'text' | 'input'
 
   /** Determines whether negative values are allowed, `true` by default.
-   * If you pass a negative when allowNegative={false}, it will convert it to a positive.
+   * If you pass a negative when `allowNegative={false}`, it will convert it to a positive.
    */
   allowNegative?: boolean
 
