@@ -86,34 +86,24 @@ import { ButtonProps, ButtonRef } from './types'
 //   @returns {JSX.Element} The rendered button component.
 //
 // Howevever, in TSDoc, the type information is already specified by Typescript, so
-// we don't need to do that. Also In TSDoc, you typically document the properties of
-// an interface rather than the component itself. Still, we might want to provide
-// an @example, or some additional comment.
+// we don't need to do that. Also for React components with TSDoc, you typically
+// document the properties of an interface rather than the component itself. Still,
+// we might want to provide an @example, or some additional comment.
+//
+// Because there are some differences between JSDoc and TSDoc, it's best to use eslint-plugin-tsdoc.
 //
 ///////////////////////////////////////////////////////////////////////////
 
-//  @param props - The props for the Button component.
-//  @param leftSection -  The leftSection (optional).
-//  @param rightSection - The rightSection (optional).
-//  @param loading - A boolean that determines if the component is shown as loading (optional).
-//  @param loadingStyle - A React.CSSProperties style object (optional).
-//  @param loadingClassName - A string that provides classes  (optional).
-//  @param loader - A loader to show instead of the default one (optional).
-//  @param isIconOnly - A boolean that informs the component that only an icon is being used (optional).
-//  @returns The rendered button component.
-
-/** 
+/**
  * In addition to the props explicitly typed, Button can take a ref and any standard React &#60;button&#62; props.
  *
  * @example
- * ```
+ * ```tsx
  * <Button
  *   className="btn-blue btn-sm"
  *   onClick={() => console.log('Clicked.')}
  * >Click Me<Button>
  * ```
- *
- 
  */
 
 export const Button = forwardRef<ButtonRef, ButtonProps>(
