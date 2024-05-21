@@ -1,8 +1,9 @@
 import { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react'
 
-export interface ButtonProps extends ComponentPropsWithRef<'button'> {
+export type ButtonProps = {
   leftSection?: ReactNode
   rightSection?: ReactNode
+  /**  Determines whether the button shows as loading. */
   loading?: boolean
   loadingStyle?: CSSProperties
   loadingClassName?: string
@@ -11,6 +12,6 @@ export interface ButtonProps extends ComponentPropsWithRef<'button'> {
    * Here, that practice is extended to also control how the loader is rendered.
    */
   isIconOnly?: boolean
-}
+} & ComponentPropsWithRef<'button'>
 
 export type ButtonRef = HTMLButtonElement

@@ -63,7 +63,37 @@ import { ButtonProps, ButtonRef } from './types'
 //     </svg>
 //   </Button>
 //
+/////////////////////////
+//
+// The following JSDoc comment is not intended for generating docs. Rather's it's primary
+// use is to add information to the VS Code popup when hovering over Button.
+// The @param descriptions should match any similar descriptions defined within ButtonProps.
+// For more info on JSDoc + React see here:
+// https://medium.com/@sanchit0496/how-to-integrate-jsdoc-in-react-js-application-e16c97635e5c
+// https://www.inkoop.io/blog/a-guide-to-js-docs-for-react-js/ d d
+//
 ///////////////////////////////////////////////////////////////////////////
+
+/**
+ * In addition to the props listed below, Button can take a ref and any standard React &#60;button&#62; props.
+ *
+ * @example
+ *
+ *   <Button
+ *     className="btn-blue btn-sm"
+ *     onClick={() => console.log("Clicked.")}
+ *   >Click Me</Button>
+ *
+ * @param {Object} props - The props for the Button component.
+ * @param {React.ReactNode} [props.leftSection=null] The leftSection (optional).
+ * @param {React.ReactNode} [props.rightSection=null] The rightSection (optional).
+ * @param {boolean} [props.loading=false] A boolean that determines if the component is shown as loading (optional).
+ * @param {React.CSSProperties} [props.loadingStyle] A React.CSSProperties style object (optional).
+ * @param {string} [props.loadingClassName=''] A string that provides classes  (optional).
+ * @param {React.ReactNode} [props.loader=null] A loader to show instead of the default one (optional).
+ * @param {boolean} [props.isIconOnly] A boolean that informs the component that only an icon is being used (optional).
+ * @returns {JSX.Element} The rendered button component.
+ */
 
 export const Button = forwardRef<ButtonRef, ButtonProps>(
   (
