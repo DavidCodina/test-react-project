@@ -6,18 +6,19 @@ type YPosition = 'top' | 'center' | 'bottom'
 interface IBackgroundImage extends ComponentProps<'div'> {
   /** src will be interpolated into `url(${src})`. If you need to do something more complex
    * Then add the backgroundImage through the style prop. For example,
-   *
+   * ```
    *   style={{
    *     backgroundImage: `linear-gradient(to right, rgb(109, 40, 217), rgb(56, 189, 248)), url(${teaTime})`,
    *     backgroundBlendMode: 'color'
    *   }}
+   * ```
    */
   src?: string
 
   size?: 'cover' | 'contain' | 'auto'
   /** If you only specify one keyword, the other value will be "center".
    * For more fine-grained positional control with percents or pixels,
-   * use the style tag instead { backgroundPosition: ... }
+   * use the style tag instead: `{ backgroundPosition: ... }`
    */
   position?:
     | 'left'

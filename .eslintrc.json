@@ -87,10 +87,12 @@
     "jest-dom",
     // "react-refresh",
     "promise",
+    "eslint-plugin-tsdoc",
     "prettier"
   ],
 
   "rules": {
+    "tsdoc/syntax": "warn",
     ///////////////////////////////////////////////////////////////////////////
     //
     // Vite comes with eslint-plugin-react-refresh baked in.

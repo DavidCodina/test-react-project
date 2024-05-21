@@ -9,7 +9,7 @@ interface ITabPanel extends ComponentProps<'div'> {
   loading?: boolean
   /** Consumer may pass in their own loader. */
   loader?: ReactNode
-  /** The unique identifier for each Tab. It should match the tabKey in the associated <Tabs.Tab>. */
+  /** The unique identifier for each Tab. It should match the tabKey in the associated `<Tabs.Tab>`. */
   tabKey: string
 }
 
