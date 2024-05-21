@@ -9,7 +9,7 @@ import { forwardRef } from 'react'
 // See tailwind.config.js..
 // import { twMerge } from 'tailwind.config'
 
-import { ButtonProps, ButtonRef } from './types'
+import type { ButtonProps, ButtonRef } from './types'
 
 /* ========================================================================
                               Button
@@ -91,13 +91,25 @@ import { ButtonProps, ButtonRef } from './types'
 // we might want to provide an @example, or some additional comment.
 //
 // Because there are some differences between JSDoc and TSDoc, it's best to use eslint-plugin-tsdoc.
+// Note: To generate documentation TypeDoc needs to know your project entry point.
+//
+//   npm i -D typedoc
+//   npx typedoc --version
+//   ❌ npx typedoc src/main.tsx
+//   ❌ npx typedoc --out docs/ src/App
+//
+//   // For this to work, it's important that EVERYTHING is exported through the index files of each directory.
+//   npx typedoc --out docs/ src/components/ src/hooks/ --watch --customCss ./docs.css
+//
+// Please note that if you point to a file, which TypeDoc says should be your application’s entry point,
+// it will generate documentation for the module that file exports2. If you point to a folder, it will
+// treat all files inside that folder as individual entry points2.
 //
 ///////////////////////////////////////////////////////////////////////////
 
 /**
- * In addition to the props explicitly typed, Button can take a ref and any standard React &#60;button&#62; props.
+ * <p>In addition to the props explicitly typed, <code>&#60;Button/&#62;</code> can take a ref and any standard React <code>&#60;button&#62;</code> props.</p>
  *
- * @example
  * ```tsx
  * <Button
  *   className="btn-blue btn-sm"
@@ -106,7 +118,7 @@ import { ButtonProps, ButtonRef } from './types'
  * ```
  */
 
-export const Button = forwardRef<ButtonRef, ButtonProps>(
+const Button = forwardRef<ButtonRef, ButtonProps>(
   (
     {
       className = '',
@@ -191,3 +203,9 @@ export const Button = forwardRef<ButtonRef, ButtonProps>(
     )
   }
 )
+
+// Exporting ButtonProps is necessary in order for TypeDoc to be aware of ButtonProps.
+// The downside is that it will create a ButtonProps list item in the
+// components list.
+
+export { Button, ButtonProps }

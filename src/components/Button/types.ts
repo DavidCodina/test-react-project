@@ -1,5 +1,8 @@
 import { ComponentPropsWithRef, CSSProperties, ReactNode } from 'react'
 
+/** <p>This comment is directly above <code>ButtonProps</code>. It will be shown
+ * in the associated  <code>ButtonProps</code> TypeDoc page.</p>
+ */
 export type ButtonProps = {
   leftSection?: ReactNode
   rightSection?: ReactNode
