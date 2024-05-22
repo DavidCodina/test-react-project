@@ -63,53 +63,12 @@ import type { ButtonProps, ButtonRef } from './types'
 //     </svg>
 //   </Button>
 //
-/////////////////////////
-//
-// The following JSDoc comment is not intended for generating docs. Rather's it's primary
-// use is to add information to the VS Code popup when hovering over Button.
-// The @param descriptions should match any similar descriptions defined within ButtonProps.
-// For more info on JSDoc + React see here:
-// https://medium.com/@sanchit0496/how-to-integrate-jsdoc-in-react-js-application-e16c97635e5c
-// https://www.inkoop.io/blog/a-guide-to-js-docs-for-react-js/
-
-//
-// In JSDoc we would put the type information in the comment:
-//
-//   @param {Object} props - The props for the Button component.
-//   @param {React.ReactNode?} props.leftSection The leftSection (optional).
-//   @param {React.ReactNode?} props.rightSection The rightSection (optional).
-//   @param {boolean?} props.loading A boolean that determines if the component is shown as loading (optional).
-//   @param {React.CSSProperties?} props.loadingStyle A React.CSSProperties style object (optional).
-//   @param {string?} props.loadingClassName A string that provides classes  (optional).
-//   @param {React.ReactNode?} props.loader A loader to show instead of the default one (optional).
-//   @param {boolean?} props.isIconOnly A boolean that informs the component that only an icon is being used (optional).
-//   @returns {JSX.Element} The rendered button component.
-//
-// Howevever, in TSDoc, the type information is already specified by Typescript, so
-// we don't need to do that. Also for React components with TSDoc, you typically
-// document the properties of an interface rather than the component itself. Still,
-// we might want to provide an @example, or some additional comment.
-//
-// Because there are some differences between JSDoc and TSDoc, it's best to use eslint-plugin-tsdoc.
-// Note: To generate documentation TypeDoc needs to know your project entry point.
-//
-//   npm i -D typedoc
-//   npx typedoc --version
-//   ❌ npx typedoc src/main.tsx
-//   ❌ npx typedoc --out docs/ src/App
-//
-//   // For this to work, it's important that EVERYTHING is exported through the index files of each directory.
-//   npx typedoc --out docs/ src/components/ src/hooks/ --watch --customCss ./docs.css
-//
-// Please note that if you point to a file, which TypeDoc says should be your application’s entry point,
-// it will generate documentation for the module that file exports2. If you point to a folder, it will
-// treat all files inside that folder as individual entry points2.
-//
 ///////////////////////////////////////////////////////////////////////////
 
 /**
  * <p>In addition to the props explicitly typed, <code>&#60;Button/&#62;</code> can take a ref and any standard React <code>&#60;button&#62;</code> props.</p>
  *
+ * @example Basic Implementation
  * ```tsx
  * <Button
  *   className="btn-blue btn-sm"
