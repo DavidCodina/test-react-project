@@ -43,6 +43,8 @@ import type {} from 'styled-components/cssprop'
 ======================================================================== */
 //# Make sure everything is being exported from components through the index.ts
 
+//# Work on tablePlugin.ts so that it doesn't use .table, which interferes with Tailwind.
+
 //# Review pre-push hook!
 
 //# Add React Image Preview (I think latest is in Next eCommerce), React Skeleton, withUnmounter, etc.
