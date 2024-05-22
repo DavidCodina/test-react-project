@@ -19,7 +19,9 @@
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "sb-build-docs": "https://storybook.js.org/docs/react/sharing/publish-storybook  - Use: npx http-server ./PATH_TO_BUILD"
+    "sb-build-docs": "https://storybook.js.org/docs/react/sharing/publish-storybook  - Use: npx http-server ./PATH_TO_BUILD",
+    "typedoc:build": "npx typedoc --out docs/ src/components/ src/hooks/ src/utils --customCss ./docs.css",
+    "typedoc:watch": "npx typedoc --out docs/ src/components/ src/hooks/ src/utils --watch --customCss ./docs.css"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
