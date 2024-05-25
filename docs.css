@@ -8,8 +8,16 @@ This is just a quick hack, but you can also look at docs/assets/style.css
 
 :root {
   /* Light */
-  --light-color-background: floralWhite; /* --light-color-background: #f2f4f8; */
-  --light-color-background-secondary: floralWhite; /* --light-color-background-secondary: #eff0f1; */
+  --light-color-background: rgb(
+    237,
+    242,
+    249
+  ); /* --light-color-background: #f2f4f8; */
+  --light-color-background-secondary: rgb(
+    237,
+    242,
+    249
+  ); /* --light-color-background-secondary: #eff0f1; */
   --light-color-warning-text: #222;
   --light-color-background-warning: #e6e600;
   --light-color-icon-background: #fff; /* --light-color-icon-background: var(--light-color-background); */
@@ -97,6 +105,12 @@ body > footer {
   border-bottom-color: #444;
   border-bottom-width: 0.5px;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+#tsd-search.has-focus {
+  background-color: #fff;
+  border-left: 0.5px solid #444;
+  border-right: 0.5px solid #444;
 }
 
 /* No need for for this since we're creating our styles here. */
