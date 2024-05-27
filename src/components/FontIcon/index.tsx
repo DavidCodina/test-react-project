@@ -1,3 +1,4 @@
+'use client'
 /* ========================================================================
                                 FontIcon        
 ======================================================================== */
@@ -11,12 +12,36 @@
 // The  new Material Symbols usse a typographic feature called ligatures,
 // which allows rendering of an icon glyph simply by using its textual name.
 //
-// To get all icons do this in index.html:
+/////////////////////////
 //
-// <link
-//   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-//   rel="stylesheet"
-// />
+// Next.js will complain if you use <link> to bring in Material Symbols:
+//
+//   <head>
+//     <link // eslint-disable-line
+//       href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200'
+//       rel='stylesheet'
+//     />
+//   </head>
+//
+//    A font-display parameter is missing (adding `&display=optional` is recommended).
+//    See: https://nextjs.org/docs/messages/google-font-displayeslint@next/next/google-font-display
+//    Custom fonts not added in `pages/_document.js` will only load for a single page. This is discouraged.
+//    See: https://nextjs.org/docs/messages/no-page-custom-fonteslint@next/next/no-page-custom-font
+//
+// Unfortunately, there is no MaterialSymbols export in 'next/font/google' :
+// https://github.com/vercel/next.js/discussions/42881
+//
+// However, we can do this in globals.css :
+//
+//   @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+//
+// Another potential option is to use:
+//
+//   https://github.com/google/material-design-icons --> https://github.com/marella/material-symbols/tree/main/material-symbols#readme
+//
+// This is what I've done here.
+//
+/////////////////////////
 //
 // Usage:
 //

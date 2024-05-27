@@ -89,7 +89,6 @@ export const CustomOffCanvas = ({
   duration = 300
 }: IMenu) => {
   const location = useLocation()
-
   const { mode, setMode } = useThemeContext()
 
   /* ======================
@@ -142,8 +141,8 @@ export const CustomOffCanvas = ({
         </button>
 
         {/* <OffCanvas.CloseButton onClose={() => setShowMenu(false)} /> */}
-
         {/* https://heroicons.com/ */}
+
         <button className='m-0 p-0' onClick={() => setShowMenu(false)}>
           <svg
             fill='none'
