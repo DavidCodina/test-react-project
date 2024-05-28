@@ -12,6 +12,43 @@ import ResizeObserver from 'resize-observer-polyfill'
 import { afterAll, afterEach, beforeAll } from 'vitest'
 import { server } from 'mocks/server'
 
+import { VirtualConsole } from 'jsdom'
+
+/* ======================
+  Suppress JSDOM Error
+====================== */
+// @starting-style is an experimental feature that jsdom is unable to parse.
+// This feature is used in the CSS stylesheet for NativeDialog.
+// The parser detects it even if you're not explicitly running tests on this
+// component or components that use it. It doesn't break any tests, but the
+// standard jsdom error adds a bunch of noise to the test output, so I've
+// suppressed it here. Update: seems to have been fixed by jsdom": "^24.1.0
+
+const virtualConsole = new VirtualConsole()
+virtualConsole.sendTo(console)
+const originalConsoleError = console.error
+
+console.error = (...args: any[]) => {
+  const errorMessage = args.join(' ')
+
+  const errorToSuppress = 'Could not parse CSS stylesheet'
+
+  if (errorMessage.includes(errorToSuppress)) {
+    // It may still be important to know that the error occurred.
+    // But I don't want it to output as verbose as it had previously.
+
+    console.log(
+      '\x1b[33m%s\x1b[0m',
+      `\nJSDom error manually suppressed within setupTests.ts: '${errorToSuppress}'\nThis could happen when using experimental CSS that jsdom is unfamiliar with.`
+    )
+
+    return
+  }
+
+  // Log other errors
+  originalConsoleError(...args)
+}
+
 /* ======================
     matchMedia (mock)
 ====================== */
@@ -120,7 +157,9 @@ window.HTMLElement.prototype.releasePointerCapture = vi.fn()
 ====================== */
 
 // Establish API mocking before all tests.
-beforeAll(() => server.listen())
+beforeAll(() => {
+  server.listen()
+})
 
 // Reset any request handlers that we may add during the tests,
 // so they don't affect other tests.

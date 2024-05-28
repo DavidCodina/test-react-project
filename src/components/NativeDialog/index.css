@@ -21,6 +21,9 @@ dialog[data-native-dialog][open] {
   transform: scale(1);
 }
 
+/* Gotcha: @starting-style is experimental. It will not necessarily break the testing
+environment, but it will cause jsdom to complain: Error: Could not parse CSS stylesheet.
+Seems to have been fixed by jsdom": "^24.1.0 */
 @starting-style {
   dialog[data-native-dialog][open] {
     opacity: 0.25;

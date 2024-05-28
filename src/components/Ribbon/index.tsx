@@ -1,14 +1,30 @@
-import React from 'react'
-import { SCRibbonContainer } from './styles'
+import { ReactNode } from 'react'
+import './index.css'
 
 /* =============================================================================
-                              Ribbon
+                                  Ribbon
 ============================================================================= */
+/* Usage:
 
-export const Ribbon = ({ children }: any) => {
+<div
+  style={{
+    margin: '0 auto',
+    height: 200,
+    position: 'relative',
+    width: 300,
+    backgroundColor: '#fff',
+    border: '1px solid #333',
+    borderRadius: 5
+  }}
+>
+  <Ribbon>Demo</Ribbon>
+</div>
+
+*/
+export const Ribbon = ({ children }: { children: ReactNode }) => {
   return (
-    <SCRibbonContainer>
+    <div className='ribbon-container'>
       <div className='ms-ribbon'>{children} </div>
-    </SCRibbonContainer>
+    </div>
   )
 }
