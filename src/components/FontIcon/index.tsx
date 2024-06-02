@@ -39,7 +39,11 @@
 //
 //   https://github.com/google/material-design-icons --> https://github.com/marella/material-symbols/tree/main/material-symbols#readme
 //
-// This is what I've done here.
+// This should be added to layout.tsx for Next.js projects.
+//
+//   import 'material-symbols'
+//
+// However, we could instead add it directly to this component instead.
 //
 /////////////////////////
 //

@@ -1,6 +1,7 @@
 // This must come first in order to prevent preflight attribute selectors with equal
 // specificity like [type='button'] from overriding certain class selectors.
 import 'styles/main.css'
+import 'material-symbols'
 
 // Third-party imports
 import ReactDOM from 'react-dom/client'
