@@ -402,7 +402,7 @@ export const convertToRGB = (value: string) => {
       : value
 
   if (value.length !== 6) {
-    throw "The convertToRGB() function's value argument was invalid."
+    throw new Error("The convertToRGB() function's value argument was invalid.")
   }
 
   const arrayRgbHex = value.match(/.{1,2}/g) // ???
