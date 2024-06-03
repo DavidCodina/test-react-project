@@ -126,7 +126,7 @@
     "testing-library/no-debugging-utils": "off",
     "prefer-const": "warn",
     "no-var": "warn",
-    "no-throw-literal": "off",
+    "no-throw-literal": "warn",
     "no-unreachable": "warn",
     "import/no-anonymous-default-export": "off",
     "no-eq-null": "warn",
