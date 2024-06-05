@@ -1,5 +1,12 @@
 import { useTitle } from 'hooks'
-import { HR, Waves, Ribbon, Page, Container } from 'components'
+import {
+  HR,
+  // Ribbon,
+  Page,
+  PageContainer, //! Change this................................
+  Waves
+} from 'components'
+import { SafeUseEffectDemo } from './components/SafeUseEffectDemo'
 
 /* ========================================================================
                                 PageHome
@@ -16,7 +23,7 @@ const PageHome = () => {
     <Page>
       <Waves />
 
-      <Container>
+      <PageContainer>
         <h1
           className='text-center text-5xl font-black'
           style={{ position: 'relative', marginBottom: 24 }}
@@ -46,7 +53,9 @@ const PageHome = () => {
 
         <HR style={{ marginBottom: 50 }} />
 
-        <div
+        <SafeUseEffectDemo />
+
+        {/* <div
           style={{
             margin: '0 auto',
             height: 200,
@@ -58,7 +67,7 @@ const PageHome = () => {
           }}
         >
           <Ribbon>Demo</Ribbon>
-        </div>
+        </div> */}
 
         {/* <Alert className='alert-blue mx-auto mb-12 max-w-2xl flex-col'>
           <div className='text-center'>
@@ -77,7 +86,7 @@ const PageHome = () => {
             <strong>PROD:</strong> {import.meta.env.PROD ? 'true' : 'false'}
           </div>
         </Alert> */}
-      </Container>
+      </PageContainer>
     </Page>
   )
 }

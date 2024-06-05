@@ -6,10 +6,10 @@ import { twMerge } from 'tailwind.config'
 type ContainerProps = ComponentProps<'div'>
 
 /* ========================================================================
-                                Container
+                              PageContainer
 ======================================================================== */
 
-export const Container = ({
+export const PageContainer = ({
   children,
   className,
   style,
