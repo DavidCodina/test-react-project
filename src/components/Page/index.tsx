@@ -3,7 +3,7 @@
 import { ComponentProps } from 'react'
 import { useThemeContext } from 'contexts'
 import { twMerge } from 'tailwind.config'
-import { Container } from './Container'
+import { PageContainer } from './PageContainer'
 
 const backgroundImage = `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='%23ddd6fe'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`
 const darkBackgroundImage = `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='%23083344'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`
@@ -81,12 +81,12 @@ const Page = ({ children, className, style, ...otherProps }: PageProps) => {
   )
 }
 
-export { Container }
+export { PageContainer }
 
 // Again, <Page.Container> will not work directly within a server component,
 // but will work when wrapped in another client component.
 const CompoundComponent = Object.assign(Page, {
-  Container: Container
+  Container: PageContainer
 })
 
 export { CompoundComponent as Page }
