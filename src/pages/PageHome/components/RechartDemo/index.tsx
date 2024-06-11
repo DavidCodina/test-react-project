@@ -3,6 +3,9 @@ import { AreaChart } from './AreaChart'
 import { BarChart } from './BarChart'
 import { LineChart } from './LineChart'
 import { PieChart } from './PieChart'
+import { PieChart2 } from './PieChart2'
+import { PieProgress } from './PieProgress'
+import { RadialProgress } from './RadialProgress'
 
 /* ========================================================================
 
@@ -33,6 +36,18 @@ export const RechartDemo = () => {
 
         <GridItem>
           <PieChart />
+        </GridItem>
+
+        <GridItem>
+          <PieChart2 />
+        </GridItem>
+
+        <GridItem>
+          <PieProgress />
+        </GridItem>
+
+        <GridItem>
+          <RadialProgress />
         </GridItem>
       </div>
     </>

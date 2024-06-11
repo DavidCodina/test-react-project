@@ -5,14 +5,13 @@ import { PieChart, Pie, ResponsiveContainer, Tooltip, Legend } from 'recharts'
 
 import { salesData } from '../data'
 import { renderLabel } from './renderLabel'
-import { renderLabelLine } from './renderLabelLine'
 import { CustomTooltip } from './CustomTooltip'
 
 /* ========================================================================
 
 ======================================================================== */
 
-const PieChartComponent = () => {
+const PieChartComponent2 = () => {
   const [showRevenue, setShowRevenue] = useState(true)
   const [showProfit, setShowProfit] = useState(true)
 
@@ -107,9 +106,7 @@ const PieChartComponent = () => {
             }}
           />
 
-          <Pie
-            startAngle={90}
-            endAngle={-270}
+          {/* <Pie
             data={[{ value: 100 }]}
             dataKey='value'
             name='background-pie'
@@ -121,53 +118,44 @@ const PieChartComponent = () => {
             cx='50%'
             cy='50%'
             style={{ pointerEvents: 'none' }}
-          />
+          /> */}
 
           <Pie
-            paddingAngle={2}
+            paddingAngle={1}
             startAngle={90}
             endAngle={-270}
             hide={!showRevenue}
             data={[...salesData].reverse()}
             dataKey='revenue'
             nameKey='name'
-            cx='50%'
+            cx='25%'
             cy='50%'
-            innerRadius={'38%'}
-            outerRadius={'58%'}
-            // innerRadius={23}
-            // outerRadius={38}
+            innerRadius={'15%'}
+            outerRadius={'90%'}
             // stroke='var(--tw-violet-950)'
             fill='var(--tw-violet-600)'
+            labelLine={false}
+            label={renderLabel}
           />
 
           <Pie
-            paddingAngle={2}
+            paddingAngle={1}
             // By default, the startAngle is set to 0, which means the first
             // slice starts at the 3 o'clock position (90 degrees).
-
             startAngle={90}
             endAngle={-270}
             hide={!showProfit}
             data={[...salesData].reverse()}
             dataKey='profit'
             nameKey='name'
-            cx='50%'
+            cx='75%'
             cy='50%'
-            // innerRadius={40}
-            // outerRadius={55}
-            innerRadius={'60%'}
-            outerRadius={'80%'}
+            innerRadius={'15%'}
+            outerRadius={'90%'}
             // stroke='var(--tw-sky-600)'
             fill='var(--tw-sky-400)'
-            // label
-            // label={(entry) => {
-            //   const name = entry?.name
-            //   return name
-            // }}
+            labelLine={false}
             label={renderLabel}
-            // labelLine={{ stroke: 'black', strokeWidth: 1 }}
-            labelLine={renderLabelLine}
           />
         </PieChart>
       </ResponsiveContainer>
@@ -175,4 +163,4 @@ const PieChartComponent = () => {
   )
 }
 
-export { PieChartComponent as PieChart }
+export { PieChartComponent2 as PieChart2 }
