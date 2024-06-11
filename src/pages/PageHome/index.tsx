@@ -6,7 +6,7 @@ import {
   PageContainer,
   Waves
 } from 'components'
-import { SafeUseEffectDemo } from './components/SafeUseEffectDemo'
+import { RechartDemo } from './components/RechartDemo'
 
 /* ========================================================================
                                 PageHome
@@ -53,7 +53,7 @@ const PageHome = () => {
 
         <HR style={{ marginBottom: 50 }} />
 
-        <SafeUseEffectDemo />
+        <RechartDemo />
 
         {/* <div
           style={{
