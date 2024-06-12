@@ -69,7 +69,7 @@ const BarChartComponent = () => {
             fontSize: '12px'
           }}
           height={0} // Default: 0
-          width={50} // Default: 60
+          width={60} // Default: 60
           dx={-10}
           // tickLine={false}
           // tickCount={5} // Default: 5
@@ -161,6 +161,7 @@ const BarChartComponent = () => {
         />
 
         <Bar
+          radius={[5, 5, 0, 0]}
           hide={!showRevenue}
           // label={{ fill: '#333', fontSize: 8 }}
           dataKey='revenue'
@@ -173,6 +174,7 @@ const BarChartComponent = () => {
         />
 
         <Bar
+          radius={[5, 5, 0, 0]}
           hide={!showProfit}
           // label={{ fill: '#333', fontSize: 8 }}
           dataKey='profit'
