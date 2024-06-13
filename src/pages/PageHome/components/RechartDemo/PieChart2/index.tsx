@@ -17,12 +17,30 @@ const PieChartComponent2 = () => {
 
   return (
     <>
-      <ResponsiveContainer
-        width='100%'
-        height='100%'
-        // style={{ outline: '1px dashed gray' }}
-      >
+      <ResponsiveContainer width='100%' height='100%'>
         <PieChart margin={{ top: 24, right: 24, left: 24, bottom: 24 }}>
+          <defs>
+            {/* --tw-violet-600 : #7c3aed */}
+            <linearGradient
+              // The id must be unique to the application in orde to avoid conflicts
+              // with other DOM elements by the same id name.
+              id='pie-gradient-1'
+              x1='0'
+              y1='0'
+              x2='0'
+              y2='1'
+            >
+              <stop offset='5%' stopColor='#7c3aed' stopOpacity={0.25} />
+              <stop offset='95%' stopColor='#7c3aed' stopOpacity={0.75} />
+            </linearGradient>
+
+            {/* --tw-sky-400 :  #38bdf8; */}
+            <linearGradient id='pie-gradient-2' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='5%' stopColor='#38bdf8' stopOpacity={0.25} />
+              <stop offset='95%' stopColor='#38bdf8' stopOpacity={0.7} />
+            </linearGradient>
+          </defs>
+
           <Tooltip
             content={<CustomTooltip />}
             wrapperStyle={{}}
@@ -114,7 +132,7 @@ const PieChartComponent2 = () => {
           /> */}
 
           <Pie
-            paddingAngle={1}
+            paddingAngle={2}
             startAngle={90}
             endAngle={-270}
             hide={!showRevenue}
@@ -125,14 +143,17 @@ const PieChartComponent2 = () => {
             cy='50%'
             innerRadius={'15%'}
             outerRadius={'90%'}
-            // stroke='var(--tw-violet-950)'
-            fill='var(--tw-violet-600)'
+            stroke='var(--tw-violet-950)'
+            strokeWidth={1}
+            //fill='var(--tw-violet-600)'
+
+            fill='url(#pie-gradient-1)'
             labelLine={false}
             label={renderLabel}
           />
 
           <Pie
-            paddingAngle={1}
+            paddingAngle={2}
             // By default, the startAngle is set to 0, which means the first
             // slice starts at the 3 o'clock position (90 degrees).
             startAngle={90}
@@ -146,7 +167,10 @@ const PieChartComponent2 = () => {
             innerRadius={'15%'}
             outerRadius={'90%'}
             // stroke='var(--tw-sky-600)'
-            fill='var(--tw-sky-400)'
+            // fill='var(--tw-sky-400)'
+            fill='url(#pie-gradient-2)'
+            stroke='var(--tw-sky-950)'
+            strokeWidth={1}
             labelLine={false}
             label={renderLabel}
           />
