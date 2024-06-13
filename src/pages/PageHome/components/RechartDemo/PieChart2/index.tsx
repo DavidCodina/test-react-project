@@ -5,25 +5,42 @@ import { PieChart, Pie, ResponsiveContainer, Tooltip, Legend } from 'recharts'
 
 import { salesData } from '../data'
 import { renderLabel } from './renderLabel'
-import { renderLabelLine } from './renderLabelLine'
 import { CustomTooltip } from './CustomTooltip'
 
 /* ========================================================================
 
 ======================================================================== */
 
-const PieChartComponent = () => {
+const PieChartComponent2 = () => {
   const [showRevenue, setShowRevenue] = useState(true)
   const [showProfit, setShowProfit] = useState(true)
 
   return (
     <>
-      <ResponsiveContainer
-        width='100%'
-        height='100%'
-        // style={{ outline: '1px dashed gray' }}
-      >
+      <ResponsiveContainer width='100%' height='100%'>
         <PieChart margin={{ top: 24, right: 24, left: 24, bottom: 24 }}>
+          <defs>
+            {/* --tw-violet-600 : #7c3aed */}
+            <linearGradient
+              // The id must be unique to the application in orde to avoid conflicts
+              // with other DOM elements by the same id name.
+              id='pie-gradient-1'
+              x1='0'
+              y1='0'
+              x2='0'
+              y2='1'
+            >
+              <stop offset='5%' stopColor='#7c3aed' stopOpacity={0.25} />
+              <stop offset='95%' stopColor='#7c3aed' stopOpacity={0.75} />
+            </linearGradient>
+
+            {/* --tw-sky-400 :  #38bdf8; */}
+            <linearGradient id='pie-gradient-2' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='5%' stopColor='#38bdf8' stopOpacity={0.25} />
+              <stop offset='95%' stopColor='#38bdf8' stopOpacity={0.7} />
+            </linearGradient>
+          </defs>
+
           <Tooltip
             content={<CustomTooltip />}
             wrapperStyle={{}}
@@ -100,9 +117,7 @@ const PieChartComponent = () => {
             }}
           />
 
-          <Pie
-            startAngle={90}
-            endAngle={-270}
+          {/* <Pie
             data={[{ value: 100 }]}
             dataKey='value'
             name='background-pie'
@@ -114,7 +129,7 @@ const PieChartComponent = () => {
             cx='50%'
             cy='50%'
             style={{ pointerEvents: 'none' }}
-          />
+          /> */}
 
           <Pie
             paddingAngle={2}
@@ -124,43 +139,40 @@ const PieChartComponent = () => {
             data={[...salesData].reverse()}
             dataKey='revenue'
             nameKey='name'
-            cx='50%'
+            cx='25%'
             cy='50%'
-            innerRadius={'38%'}
-            outerRadius={'58%'}
-            // innerRadius={23}
-            // outerRadius={38}
-            // stroke='var(--tw-violet-950)'
-            fill='var(--tw-violet-600)'
+            innerRadius={'15%'}
+            outerRadius={'90%'}
+            stroke='var(--tw-violet-950)'
+            strokeWidth={1}
+            //fill='var(--tw-violet-600)'
+
+            fill='url(#pie-gradient-1)'
+            labelLine={false}
+            label={renderLabel}
           />
 
           <Pie
             paddingAngle={2}
             // By default, the startAngle is set to 0, which means the first
             // slice starts at the 3 o'clock position (90 degrees).
-
             startAngle={90}
             endAngle={-270}
             hide={!showProfit}
             data={[...salesData].reverse()}
             dataKey='profit'
             nameKey='name'
-            cx='50%'
+            cx='75%'
             cy='50%'
-            // innerRadius={40}
-            // outerRadius={55}
-            innerRadius={'60%'}
-            outerRadius={'80%'}
+            innerRadius={'15%'}
+            outerRadius={'90%'}
             // stroke='var(--tw-sky-600)'
-            fill='var(--tw-sky-400)'
-            // label
-            // label={(entry) => {
-            //   const name = entry?.name
-            //   return name
-            // }}
+            // fill='var(--tw-sky-400)'
+            fill='url(#pie-gradient-2)'
+            stroke='var(--tw-sky-950)'
+            strokeWidth={1}
+            labelLine={false}
             label={renderLabel}
-            // labelLine={{ stroke: 'black', strokeWidth: 1 }}
-            labelLine={renderLabelLine}
           />
         </PieChart>
       </ResponsiveContainer>
@@ -168,4 +180,4 @@ const PieChartComponent = () => {
   )
 }
 
-export { PieChartComponent as PieChart }
+export { PieChartComponent2 as PieChart2 }

@@ -60,11 +60,23 @@ const AreaChartComponent = () => {
         // style={{ outline: '1px dashed gray' }}
         // Gotcha: neither a className of m-0 nor a style={{ margin: 0 }} will change
         // the default margin. You actually need to use the margin prop.
-        margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+        margin={{ top: 24, right: 24, left: 24, bottom: 24 }}
       >
-        {/*
-        Known issue: https://github.com/recharts/recharts/issues/3615
-        */}
+        <defs>
+          {/* --tw-violet-600 : #7c3aed */}
+          <linearGradient id='violet-gradient' x1='0' y1='0' x2='0' y2='1'>
+            <stop offset='5%' stopColor='#7c3aed' stopOpacity={0.75} />
+            <stop offset='95%' stopColor='#7c3aed' stopOpacity={0.0} />
+          </linearGradient>
+
+          {/* --tw-sky-400 :  #38bdf8; */}
+          <linearGradient id='sky-gradient' x1='0' y1='0' x2='0' y2='1'>
+            <stop offset='5%' stopColor='#38bdf8' stopOpacity={0.75} />
+            <stop offset='95%' stopColor='#38bdf8' stopOpacity={0.0} />
+          </linearGradient>
+        </defs>
+
+        {/* Known issue: https://github.com/recharts/recharts/issues/3615 */}
         <YAxis
           tick={{
             fontSize: '12px'
@@ -74,6 +86,8 @@ const AreaChartComponent = () => {
           dx={-10}
           // tickLine={false}
           // tickCount={5} // Default: 5
+
+          stroke='var(--tw-sky-400)'
         />
         <XAxis
           angle={0} // Default: 0
@@ -82,12 +96,19 @@ const AreaChartComponent = () => {
             fontSize: '12px'
           }}
           dy={10}
+          stroke='var(--tw-violet-600)'
+
           // tickCount={5} // Default: 5 - not changing ???
           // height={30} // Default: 30
           // width={0} // Default: 0
           // tickLine={false}
         />
-        <CartesianGrid fill='#fff' strokeDasharray='5 5' />
+        <CartesianGrid
+          fill='#fff'
+          stroke='var(--tw-violet-600)'
+          strokeOpacity={0.2}
+          strokeDasharray='5 5'
+        />
 
         <Tooltip content={<CustomTooltip />} />
         <Legend
@@ -97,7 +118,18 @@ const AreaChartComponent = () => {
             // const dataKey = (entry as any)?.dataKay || (entry?.payload as any)?.dataKey || entry.payload?.value
             // const payload = entry.payload
             const isInactive = (entry as any)?.inactive
-            const fill = (entry?.payload as any)?.fill
+            let fill = (entry?.payload as any)?.fill
+
+            // This is necessary when using the gradient fills.
+            switch (fill) {
+              case 'url(#violet-gradient)':
+                fill = 'var(--tw-violet-600)'
+                break
+
+              case 'url(#sky-gradient)':
+                fill = 'var(--tw-sky-400)'
+                break
+            }
 
             return (
               <span
@@ -138,7 +170,7 @@ const AreaChartComponent = () => {
           // iconType='cross'
           // content={renderLegend}
           wrapperStyle={{
-            bottom: -5
+            bottom: 10
           }}
           //margin={{ top: 10, left: 0, right: 10, bottom: 0 }}
 
@@ -164,7 +196,9 @@ const AreaChartComponent = () => {
           type='monotone' // Makes the lines wavey rather than straight.
           // The stroke color automatically gets applied to the legend.
           stroke='var(--tw-violet-950)' // Changes the line color.
-          fill='var(--tw-violet-600)' // Changes the color of the body.
+          // fill='var(--tw-violet-600)' // Changes the color of the body.'
+          // fillOpacity={0.25}
+          fill='url(#violet-gradient)' // Using this fill will kill the Legend color inheritance.
           // Rather than overlaying the charts, we can stack them.
           stackId='1'
         />
@@ -176,7 +210,9 @@ const AreaChartComponent = () => {
           dataKey='profit'
           type='monotone' // Makes the lines wavey rather than straight.
           stroke='var(--tw-sky-950)' // Changes the line color.
-          fill='var(--tw-sky-400)' // Changes the color of the body.
+          // fill='var(--tw-sky-400)' // Changes the color of the body.
+          // fillOpacity={0.25}
+          fill='url(#sky-gradient)' // Using this fill will kill the Legend color inheritance.
           stackId='1'
         />
       </AreaChart>

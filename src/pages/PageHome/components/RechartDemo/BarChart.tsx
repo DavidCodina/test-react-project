@@ -53,23 +53,16 @@ const BarChartComponent = () => {
   return (
     <ResponsiveContainer width='100%' height='100%'>
       <BarChart
-        // height={500}
-        // width={500}
         data={salesData}
-        // style={{ outline: '1px dashed gray' }}
-        // Gotcha: neither a className of m-0 nor a style={{ margin: 0 }} will change
-        // the default margin. You actually need to use the margin prop.
-        margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+        margin={{ top: 24, right: 24, left: 24, bottom: 24 }}
       >
-        {/*
-        Known issue: https://github.com/recharts/recharts/issues/3615
-        */}
+        {/* Known issue: https://github.com/recharts/recharts/issues/3615*/}
         <YAxis
           tick={{
             fontSize: '12px'
           }}
           height={0} // Default: 0
-          width={50} // Default: 60
+          width={60} // Default: 60
           dx={-10}
           // tickLine={false}
           // tickCount={5} // Default: 5
@@ -141,10 +134,8 @@ const BarChartComponent = () => {
           // iconType='cross'
           // content={renderLegend}
           wrapperStyle={{
-            bottom: -5
+            bottom: 10
           }}
-          //margin={{ top: 10, left: 0, right: 10, bottom: 0 }}
-
           onClick={(e) => {
             const dataKey = e.dataKey
 
@@ -161,6 +152,7 @@ const BarChartComponent = () => {
         />
 
         <Bar
+          radius={[5, 5, 0, 0]}
           hide={!showRevenue}
           // label={{ fill: '#333', fontSize: 8 }}
           dataKey='revenue'
@@ -173,6 +165,7 @@ const BarChartComponent = () => {
         />
 
         <Bar
+          radius={[5, 5, 0, 0]}
           hide={!showProfit}
           // label={{ fill: '#333', fontSize: 8 }}
           dataKey='profit'

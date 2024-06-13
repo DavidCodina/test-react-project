@@ -1,3 +1,11 @@
+export const skills = [
+  { name: 'HTML', skill: 100 },
+  { name: 'CSS', skill: 90 },
+  { name: 'Typescript', skill: 65 },
+  { name: 'React', skill: 95 },
+  { name: 'Node', skill: 63 }
+]
+
 export const salesData = [
   {
     name: 'Jan',
