@@ -86,6 +86,8 @@ const AreaChartComponent = () => {
           dx={-10}
           // tickLine={false}
           // tickCount={5} // Default: 5
+
+          stroke='var(--tw-sky-400)'
         />
         <XAxis
           angle={0} // Default: 0
@@ -94,12 +96,19 @@ const AreaChartComponent = () => {
             fontSize: '12px'
           }}
           dy={10}
+          stroke='var(--tw-violet-600)'
+
           // tickCount={5} // Default: 5 - not changing ???
           // height={30} // Default: 30
           // width={0} // Default: 0
           // tickLine={false}
         />
-        <CartesianGrid fill='#fff' strokeDasharray='5 5' />
+        <CartesianGrid
+          fill='#fff'
+          stroke='var(--tw-violet-600)'
+          strokeOpacity={0.2}
+          strokeDasharray='5 5'
+        />
 
         <Tooltip content={<CustomTooltip />} />
         <Legend

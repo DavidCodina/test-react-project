@@ -8,7 +8,8 @@ import { PieProgress } from './PieProgress'
 import { RadialProgress } from './RadialProgress'
 import { HorizontalSkills } from './HorizontalSkills'
 import { PercentGauge } from './PercentGauge'
-
+import { WedgeChart } from './WedgeChart'
+import { CustomShapeBarChart } from './CustomShapeBarChart'
 // import { Gauge } from './Gauge'
 
 /* ========================================================================
@@ -24,8 +25,6 @@ import { PercentGauge } from './PercentGauge'
 
 // Todo: Lama Dev  : https://www.youtube.com/watch?v=fq7k_gVV5x8
 // Todo at 2:18:45 : https://www.youtube.com/watch?v=uoJ0Tv-BFcQ&t=2030s
-// Todo: https://www.youtube.com/watch?v=vyj4a4zj0Ek
-// Todo: https://www.youtube.com/watch?v=a0Ocw427J0w
 
 export const RechartDemo = () => {
   return (
@@ -71,6 +70,14 @@ export const RechartDemo = () => {
 
         <GridItem>
           <PercentGauge percent={33.33} />
+        </GridItem>
+
+        <GridItem>
+          <WedgeChart />
+        </GridItem>
+
+        <GridItem>
+          <CustomShapeBarChart />
         </GridItem>
 
         {/* <GridItem>

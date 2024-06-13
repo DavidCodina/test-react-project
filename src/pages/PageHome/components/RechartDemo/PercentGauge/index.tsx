@@ -72,12 +72,15 @@ export const PercentGauge = ({ percent = 0 }: { percent?: number }) => {
         </defs>
 
         <Legend
+          // verticalAlign='top'
           content={(props) => {
-            return renderLegend(props, percent, labelFontSize)
+            return renderLegend(props, percent, 16)
           }}
           iconSize={0}
           wrapperStyle={{
-            bottom: '5%'
+            top: '5%',
+            left: '2.5%',
+            width: 'auto'
           }}
         />
 
@@ -104,6 +107,16 @@ export const PercentGauge = ({ percent = 0 }: { percent?: number }) => {
               fontSize: labelFontSize,
               fontWeight: 700,
               transform: 'translate(-38%, 76%)'
+            }}
+          />
+
+          <Label
+            value={`${Math.round(percent)}%`}
+            fill='var(--tw-violet-600)'
+            style={{
+              fontSize: labelFontSize,
+              fontWeight: 700,
+              transform: 'translate(0%, 76%)'
             }}
           />
 

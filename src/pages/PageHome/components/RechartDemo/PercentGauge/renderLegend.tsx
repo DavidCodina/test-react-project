@@ -38,7 +38,7 @@ export const renderLegend = (props: any, percent: number, fontSize: number) => {
         return (
           <div
             key={index}
-            className='mx-auto flex items-center text-violet-600'
+            className='text-violet-600'
             style={{
               lineHeight: 1
             }}
@@ -47,15 +47,12 @@ export const renderLegend = (props: any, percent: number, fontSize: number) => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                flex: 1,
-                textAlign: 'center',
                 fontSize: fontSize,
                 fontWeight: 700
               }}
             >
               {legendIcon}
-              {Math.round(percent)}%
+              {entry.value}
             </span>
           </div>
         )
@@ -63,3 +60,47 @@ export const renderLegend = (props: any, percent: number, fontSize: number) => {
     </>
   )
 }
+
+/* ========================================================================
+
+======================================================================== */
+// Originally, I used this custom legend to try to center the percent under the
+// needle. However, using a <Label /> works better for that.
+
+// export const renderLegend = (props: any, percent: number, fontSize: number) => {
+//   const { payload } = props
+
+//   return (
+//     <>
+//       {payload.map((entry: any, index: number) => {
+//         if (index !== 0) {
+//           return null
+//         }
+//         return (
+//           <div
+//             key={index}
+//             className='mx-auto flex items-center text-violet-600'
+//             style={{
+//               lineHeight: 1
+//             }}
+//           >
+//             <span
+//               style={{
+//                 display: 'flex',
+//                 alignItems: 'center',
+//                 justifyContent: 'center',
+//                 flex: 1,
+//                 textAlign: 'center',
+//                 fontSize: fontSize,
+//                 fontWeight: 700
+//               }}
+//             >
+//               {legendIcon}
+//               {Math.round(percent)}%
+//             </span>
+//           </div>
+//         )
+//       })}
+//     </>
+//   )
+// }
