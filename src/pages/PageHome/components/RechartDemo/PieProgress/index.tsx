@@ -21,14 +21,11 @@ export const PieProgress = () => {
   return (
     <>
       <ResponsiveContainer width='100%' height='100%'>
-        <PieChart
-          //style={{ outline: '1px dashed red' }}
-          margin={{ top: 0, right: 0, bottom: -5, left: 0 }}
-        >
+        <PieChart margin={{ top: 24, right: 24, bottom: 24, left: 24 }}>
           <Legend
             iconSize={0} // Default: 14
             wrapperStyle={{
-              bottom: -10
+              bottom: 10
             }}
             payload={[
               {

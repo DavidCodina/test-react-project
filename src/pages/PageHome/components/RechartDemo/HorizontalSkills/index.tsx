@@ -48,7 +48,7 @@ export const HorizontalSkills = () => {
           height={300}
           data={skills}
           layout='vertical'
-          margin={{ top: 0, right: 10, left: 20, bottom: -10 }}
+          margin={{ top: 24, right: 24, left: 24, bottom: 24 }}
         >
           <CartesianGrid strokeDasharray='5 5' fill='#fff' />
 
@@ -122,10 +122,15 @@ export const HorizontalSkills = () => {
                 </span>
               )
             }}
+            // wrapperStyle={{
+            //   // outline: '1px dashed red',
+            //   marginLeft: '5%',
+            //   bottom: -8
+            // }}
+
             wrapperStyle={{
-              // outline: '1px dashed red',
-              marginLeft: '5%',
-              bottom: -8
+              marginLeft: '32px',
+              bottom: 10
             }}
             iconSize={0} // Default: 14
           />

@@ -7,8 +7,9 @@ import { PieChart2 } from './PieChart2'
 import { PieProgress } from './PieProgress'
 import { RadialProgress } from './RadialProgress'
 import { HorizontalSkills } from './HorizontalSkills'
-// import { Gauge } from './Gauge'
 import { PercentGauge } from './PercentGauge'
+
+// import { Gauge } from './Gauge'
 
 /* ========================================================================
 
@@ -68,13 +69,13 @@ export const RechartDemo = () => {
           <HorizontalSkills />
         </GridItem>
 
+        <GridItem>
+          <PercentGauge percent={33.33} />
+        </GridItem>
+
         {/* <GridItem>
           <Gauge />
         </GridItem> */}
-
-        <GridItem>
-          <PercentGauge percent={33} />
-        </GridItem>
       </div>
     </>
   )
@@ -83,8 +84,8 @@ export const RechartDemo = () => {
 const GridItem = ({ children }: { children: ReactNode }) => {
   return (
     <div
-      className={`flex aspect-video flex-col items-center justify-center rounded-xl border-[1.5px] border-[#409] 
-      bg-[rgb(247,252,255)] p-4 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.2)]
+      className={`flex aspect-video flex-col items-center justify-center rounded-xl border-[1.5px] border-[#409] bg-[rgb(247,252,255)] 
+      shadow-[0_35px_60px_-15px_rgba(0,0,0,0.2)]
       `}
     >
       {children}

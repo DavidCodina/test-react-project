@@ -57,14 +57,9 @@ const LineChartComponent = () => {
         // height={500}
         // width={500}
         data={salesData}
-        // style={{ outline: '1px dashed gray' }}
-        // Gotcha: neither a className of m-0 nor a style={{ margin: 0 }} will change
-        // the default margin. You actually need to use the margin prop.
-        margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+        margin={{ top: 24, right: 24, left: 24, bottom: 24 }}
       >
-        {/*
-        Known issue: https://github.com/recharts/recharts/issues/3615
-        */}
+        {/* Known issue: https://github.com/recharts/recharts/issues/3615 */}
         <YAxis
           tick={{
             fontSize: '12px'
@@ -142,10 +137,8 @@ const LineChartComponent = () => {
           // iconType='cross'
           // content={renderLegend}
           wrapperStyle={{
-            bottom: -5
+            bottom: 10
           }}
-          //margin={{ top: 10, left: 0, right: 10, bottom: 0 }}
-
           onClick={(e) => {
             const dataKey = e.dataKey
 

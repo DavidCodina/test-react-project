@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 import {
   RadialBarChart,
@@ -52,32 +52,23 @@ export const RadialProgress = () => {
   ====================== */
 
   return (
-    <ResponsiveContainer
-      width='100%'
-      height='100%'
-      style={{
-        position: 'relative',
-        top: -10
-      }}
-      ref={chartRef}
-    >
+    <ResponsiveContainer width='100%' height='100%' ref={chartRef}>
       <RadialBarChart
         cx={'50%'}
-        cy={'50%'}
-        innerRadius={'85%'}
-        outerRadius={'85%'}
+        cy={'45%'}
+        innerRadius={'90%'}
+        outerRadius={'110%'}
         barSize={barSize} // barSize={'12'}
         data={data}
         startAngle={90}
         endAngle={-270}
-        // style={{ outline: '1px dashed red' }}
-        margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+        margin={{ top: 24, right: 24, left: 24, bottom: 24 }}
       >
         <Legend
           layout='vertical'
           iconSize={0} // Default: 14
           wrapperStyle={{
-            bottom: -16
+            bottom: 10
           }}
           // Note: RadialBar doesn't explicitly set a color property for legend rendering.
           formatter={(value, _entry, _index) => {

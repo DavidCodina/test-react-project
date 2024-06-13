@@ -23,8 +23,8 @@ const needle = (options: any) => {
   const sin = Math.sin(-RADIAN * ang)
   const cos = Math.cos(-RADIAN * ang)
   const r = 4 // fatness of needle.
-  const x0 = cx //! + 5
-  const y0 = cy //! + 5
+  const x0 = cx
+  const y0 = cy
   const xba = x0 + r * sin
   const yba = y0 - r * cos
   const xbb = x0 - r * sin

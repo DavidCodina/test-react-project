@@ -23,14 +23,7 @@ const PieChartComponent = () => {
         height='100%'
         // style={{ outline: '1px dashed gray' }}
       >
-        <PieChart
-          // height={500}
-          // width={500}
-          // style={{ outline: '1px dashed gray' }}
-          // Gotcha: neither a className of m-0 nor a style={{ margin: 0 }} will change
-          // the default margin. You actually need to use the margin prop.
-          margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
-        >
+        <PieChart margin={{ top: 24, right: 24, left: 24, bottom: 24 }}>
           <Tooltip
             content={<CustomTooltip />}
             wrapperStyle={{}}
@@ -91,7 +84,7 @@ const PieChartComponent = () => {
             // we're currently using a custom icon in the formatter.
             iconSize={0} // Default: 14
             wrapperStyle={{
-              bottom: -5
+              bottom: 10
             }}
             onClick={(e) => {
               const dataKey = e.dataKey
